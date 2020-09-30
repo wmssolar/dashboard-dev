@@ -104,6 +104,8 @@
 <script>
 import LineChart from 'src/components/Charts/LineChart';
 import BarChart from 'src/components/Charts/BarChart';
+
+
 export default {
   components: {
     LineChart,

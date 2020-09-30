@@ -3,14 +3,14 @@
     .img-wrapper{
       width: 40px;
       height: 40px;
-      border-radius: 50%;
+      border-radius: 20%;
       overflow: hidden;
       margin: 0 auto;
     }
 
     .img-row{
-      max-width: 60px;
-      width: 60px;
+      max-width: 50px;
+      width: 50px;
     }
 
     .form-check{
@@ -28,7 +28,7 @@
     }
 
     small,.small{
-      font-weight: 300;
+      font-weight: 200;
     }
 
     .card-tasks .card-body &{
@@ -47,7 +47,7 @@
 
    > thead > tr > th{
        border-bottom-width: 1px;
-       font-size: 1.45em;
+       font-size: 1.00em;
        font-weight: $font-weight-light;
        border: 0;
    }
@@ -77,15 +77,19 @@
    > thead > tr > td,
    > tbody > tr > td,
    > tfoot > tr > td{
-       padding: 12px 7px;
-       vertical-align: middle;
+       padding: 10px 5px;
+       vertical-align: 100%;
+      //  background-color: #E9EEF3 !important;
+      //  #E9EEF3
+      // #303133
+
    }
 
    .th-description{
-       max-width: 150px;
+       max-width: 120px;
    }
    .td-price{
-       font-size: 26px;
+       font-size: 20px;
        font-weight: $font-weight-light;
        margin-top: 5px;
        position: relative;
@@ -125,24 +129,24 @@
         font-weight: $font-weight-normal;
         font-size: 1.5em;
         small{
-            color: $dark-gray;
+            color: $black-color;
             font-size: 0.75em;
             font-weight: $font-weight-light;
         }
     }
     .td-number{
        font-weight: $font-weight-light;
-       font-size: $font-size-h4;
+       font-size: $font-size-h1;
    }
     .td-name{
-        min-width: 200px;
+        min-width: 100px;
     }
     .td-number{
         text-align: right;
         min-width: 170px;
 
         small{
-            margin-right: 3px;
+            margin-right: 1px;
         }
     }
 
@@ -164,5 +168,5 @@
 }
 
 #tables .table-responsive{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }

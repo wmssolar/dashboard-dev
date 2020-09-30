@@ -25,7 +25,7 @@ export default {
 <style>
 .bg {
   background-position: center;
-  background-color: #57595d;
+  background-color: lightgray;
   background-size: cover;
 }
 </style>

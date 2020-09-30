@@ -1,15 +1,10 @@
 import DashboardLayout from 'src/pages/Dashboard/Layout/DashboardLayout.vue';
-import AuthLayout from 'src/pages/Dashboard/Pages/AuthLayout.vue';
-// GeneralViews
-import NotFound from 'src/pages/GeneralViews/NotFoundPage.vue';
-
 // Page Headers
 import CalendarHeader from 'src/pages/Dashboard/Calendar/CalendarHeader';
 const DashboardHeader = () => import(/* webpackChunkName: "dashboard" */ 'src/pages/Dashboard/Dashboard/DashboardHeader.vue');
 import DefaultHeader from 'src/pages/Dashboard/DefaultHeader';
 import SweetAlertHeader from 'src/pages/Dashboard/Components/Headers/SweetAlertHeader';
 import VectorMapsHeader from 'src/pages/Dashboard/Maps/VectorMapsHeader';
-
 
 // Calendar
 const Calendar = () =>
@@ -40,12 +35,6 @@ const Dashboard = () => import(/* webpackChunkName: "dashboard" */ 'src/pages/Da
 import Widgets from 'src/pages/Dashboard/Widgets.vue';
 
 // Forms pages
-const RegularForms = () => import('src/pages/Dashboard/Forms/RegularForms.vue');
-const ExtendedForms = () =>
-  import('src/pages/Dashboard/Forms/ExtendedForms.vue');
-const ValidationForms = () =>
-  import('src/pages/Dashboard/Forms/ValidationForms.vue');
-const Wizard = () => import('src/pages/Dashboard/Forms/Wizard.vue');
 
 // Maps pages
 const GoogleMaps = () =>
@@ -55,27 +44,12 @@ const FullScreenMap = () =>
 const VectorMaps = () =>
   import(/* webpackChunkName: "maps" */ 'src/pages/Dashboard/Maps/VectorMaps.vue');
 
-// Pages
-const User = () =>
-  import(/* webpackChunkName: "pages" */ 'src/pages/Dashboard/Pages/UserProfile.vue');
-const Pricing = () =>
-  import(/* webpackChunkName: "pages" */ 'src/pages/Dashboard/Pages/Pricing.vue');
-const TimeLine = () =>
-  import(/* webpackChunkName: "pages" */ 'src/pages/Dashboard/Pages/TimeLinePage.vue');
-const Login = () =>
-  import(/* webpackChunkName: "auth" */ 'src/pages/Dashboard/Pages/Login.vue');
-const Register = () =>
-  import(/* webpackChunkName: "auth" */ 'src/pages/Dashboard/Pages/Register.vue');
-const Lock = () =>
-  import(/* webpackChunkName: "auth" */ 'src/pages/Dashboard/Pages/Lock.vue');
+
+
 
 // TableList pages
 const RegularTables = () =>
   import(/* webpackChunkName: "tables" */ 'src/pages/Dashboard/Tables/RegularTables.vue');
-const ExtendedTables = () =>
-  import(/* webpackChunkName: "tables" */ 'src/pages/Dashboard/Tables/ExtendedTables.vue');
-const PaginatedTables = () =>
-  import(/* webpackChunkName: "tables" */ 'src/pages/Dashboard/Tables/PaginatedTables.vue');
 
   let componentsMenu = {
   path: '/components',
@@ -120,34 +94,7 @@ const PaginatedTables = () =>
     }
   ]
 };
-let formsMenu = {
-  path: '/forms',
-  component: DashboardLayout,
-  redirect: '/forms/regular',
-  name: 'Forms',
-  children: [
-    {
-      path: 'regular',
-      name: 'Regular Forms',
-      components: { default: RegularForms, header: DefaultHeader }
-    },
-    {
-      path: 'extended',
-      name: 'Extended Forms',
-      components: { default: ExtendedForms, header: DefaultHeader }
-    },
-    {
-      path: 'validation',
-      name: 'Validation Forms',
-      components: { default: ValidationForms, header: DefaultHeader }
-    },
-    {
-      path: 'wizard',
-      name: 'Wizard',
-      components: { default: Wizard, header: DefaultHeader }
-    }
-  ]
-};
+
 
 let tablesMenu = {
   path: '/table-list',
@@ -160,16 +107,7 @@ let tablesMenu = {
       name: 'Regular Tables',
       components: { default: RegularTables, header: DefaultHeader }
     },
-    {
-      path: 'extended',
-      name: 'Extended Tables',
-      components: { default: ExtendedTables, header: DefaultHeader }
-    },
-    {
-      path: 'paginated',
-      name: 'Paginated Tables',
-      components: { default: PaginatedTables, header: DefaultHeader }
-    }
+ 
   ]
 };
 
@@ -201,52 +139,7 @@ let mapsMenu = {
   ]
 };
 
-let pagesMenu = {
-  path: '/pages',
-  component: DashboardLayout,
-  name: 'Pages',
-  redirect: '/pages/user',
-  children: [
-    {
-      path: 'user',
-      name: 'User Page',
-      components: { default: User, header: DefaultHeader }
-    },
-    {
-      path: 'timeline',
-      name: 'Timeline Page',
-      components: { default: TimeLine, header: DefaultHeader }
-    }
-  ]
-};
 
-let authPages = {
-  path: '/',
-  component: AuthLayout,
-  name: 'Authentication',
-  children: [
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    },
-    {
-      path: '/pricing',
-      name: 'Pricing',
-      component: Pricing
-    },
-    {
-      path: '/lock',
-      name: 'Lock',
-      component: Lock
-    }
-  ]
-};
 
 const routes = [
   {
@@ -255,11 +148,9 @@ const routes = [
     name: 'Home'
   },
   componentsMenu,
-  formsMenu,
   tablesMenu,
   mapsMenu,
-  pagesMenu,
-  authPages,
+ 
   {
     path: '/',
     component: DashboardLayout,
@@ -293,7 +184,9 @@ const routes = [
       }
     ]
   },
-  { path: '*', component: NotFound }
+  { path: '*'
+
+}
 ];
 
 export default routes;

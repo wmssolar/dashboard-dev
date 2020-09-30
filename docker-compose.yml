@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  webui:
+    build: .
+    image: wmsolar/centosapiv1:latest
+    container_name: dashboard
+    networks:
+      - overlay
+    privileged: true
+    ports:
+      - "8080:8080"
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/scr/app
+
+networks:
+   overlay:

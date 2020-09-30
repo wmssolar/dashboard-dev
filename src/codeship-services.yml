@@ -1,0 +1,10 @@
+dashboard:
+    build: 
+      image: wmsolar/centosapiv1:latest 
+      dockerfile: Dockerfile
+    cached: true
+ 
+  
+      
+   
+   

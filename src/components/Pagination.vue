@@ -40,6 +40,7 @@ export default {
       type: Number,
       default: 0
     },
+   
     perPage: {
       type: Number,
       default: 10

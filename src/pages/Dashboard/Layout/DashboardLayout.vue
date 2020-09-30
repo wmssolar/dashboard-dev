@@ -3,28 +3,11 @@
     <notifications></notifications>
     <side-bar>
       <template slot-scope="props" slot="links">
-        <user-menu></user-menu>
+        <!-- <user-menu></user-menu> -->
         <sidebar-item :link="{name: 'Dashboard', icon: 'now-ui-icons design_app', path: '/dashboard'}">
         </sidebar-item>
-        <sidebar-item :link="{name: 'Pages', icon: 'now-ui-icons design_image'}">
-
-          <sidebar-item :link="{name: 'User Profile', path: '/pages/user'}"></sidebar-item>
-        </sidebar-item>
-        <!-- <sidebar-item :link="{name: 'Components', icon: 'now-ui-icons education_atom'}">
-          <sidebar-item :link="{name: 'Buttons', path: '/components/buttons'}"></sidebar-item>
-          <sidebar-item :link="{name: 'Grid System', path: '/components/grid-system'}"></sidebar-item>
-          <sidebar-item :link="{name: 'Panels', path: '/components/panels'}"></sidebar-item>
-          <sidebar-item :link="{name: 'Sweet Alert', path: '/components/sweet-alert'}"></sidebar-item>
-          <sidebar-item :link="{name: 'Notifications', path: '/components/notifications'}"></sidebar-item>
-          <sidebar-item :link="{name: 'Icons', path: '/components/icons'}"></sidebar-item>
-          <sidebar-item :link="{name: 'Typography', path: '/components/typography'}"></sidebar-item>
-        </sidebar-item> -->
-        <!-- <sidebar-item :link="{name: 'Forms', icon: 'now-ui-icons files_single-copy-04'}">
-          <sidebar-item :link="{name: 'Regular Forms', path: '/forms/regular'}"></sidebar-item>
-          <sidebar-item :link="{name: 'Extended Forms', path: '/forms/extended'}"></sidebar-item>
-          <sidebar-item :link="{name: 'Validation Forms', path: '/forms/validation'}"></sidebar-item>
-          <sidebar-item :link="{name: 'Wizard', path: '/forms/wizard'}"></sidebar-item>
-        </sidebar-item> -->
+     
+       
         <sidebar-item :link="{name: 'Tables', icon: 'now-ui-icons design_bullet-list-67'}">
           <sidebar-item :link="{name: 'Regular Tables', path: '/table-list/regular'}"></sidebar-item>
 

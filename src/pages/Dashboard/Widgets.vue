@@ -287,7 +287,7 @@ export default {
 <style>
 .bg {
   background-position: center;
-  background-color: #57595d;
+  background-color:  	#2f2f2f;
   background-size: cover;
 }
 </style>

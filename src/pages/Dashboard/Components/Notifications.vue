@@ -158,7 +158,7 @@
                       <div class="col-md-8">
                         <strong>1. Register</strong>
                         <p class="description">The first step is to create an account at <a
-                          href="http://www.creative-tim.com/">Creative Tim</a>. You can choose a social network or
+                          href=" "> </a>. You can choose a social network or
                           go for the classic version, whatever works best for you.</p>
                       </div>
                       <div class="col-md-4">
@@ -173,7 +173,7 @@
                       <div class="col-md-8">
                         <strong>2. Apply</strong>
                         <p class="description">The first step is to create an account at <a
-                          href="http://www.creative-tim.com/">Creative Tim</a>. You can choose a social network or
+                          href=""> </a>. You can choose a social network or
                           go for the classic version, whatever works best for you.</p>
                       </div>
                       <div class="col-md-4">
@@ -183,7 +183,7 @@
                       </div>
                     </div>
                   </div>
-                  <p>If you have more questions, don't hesitate to contact us or send us a tweet @creativetim. We're
+                  <p>If you have more questions, don't hesitate to contact us or send us a tweet @user. We're
                     here to help!</p>
                 </template>
                 <div slot="footer" class="justify-content-center">
