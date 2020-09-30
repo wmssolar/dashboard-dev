@@ -1,4 +1,4 @@
-FROM wmsolar/centosnode-base:latest
+FROM wmsolar/dashboard:latest
 
 #  Create app directory
 WORKDIR  /usr/src/dashbd
