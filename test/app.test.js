@@ -6,7 +6,7 @@ var chai = require('chai')
   , chaiHttp = require('chai-http');
 const should = chai.should();
 
-const SERVER_URL = process.env.APP_URL || "http://localhost:8080";
+const SERVER_URL = process.env.APP_URL || "http://localhost:8000";
 
 chai.use(chaiHttp);
   
