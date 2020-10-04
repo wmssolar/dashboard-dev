@@ -221,7 +221,7 @@ data(){
             }]
         },
 
-           fields: [
+      fields: [
           {
             key: 'Metric',
             sortable: false,

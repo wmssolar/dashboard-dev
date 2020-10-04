@@ -6,9 +6,10 @@ WORKDIR  /usr/src/dashbd
 # Install app dependencies
 COPY package*.json ./
 
-RUN npm install
-
-RUN npm rebuild node-sass
+RUN npm install && \
+    npm rebuild node-sass && \
+    yum clean all && \
+    rm -rf /var/cache/yum  
 
 COPY . .
 
