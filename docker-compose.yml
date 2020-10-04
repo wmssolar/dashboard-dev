@@ -2,7 +2,7 @@ version: '3.8'
 services:
   webui:
     build: .
-    image: wmsolar/dashboard:latest
+    image: wmsolar/dashboardv2:latest
     container_name: dashboard
     networks:
       - overlay
