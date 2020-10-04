@@ -1,6 +1,6 @@
 {
-  "name": "vue-now-ui-dashboard-pro",
-  "short_name": "vue-now-ui-dashboard-pro",
+  "name": "vue-now-ui",
+  "short_name": "vue-now-ui",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

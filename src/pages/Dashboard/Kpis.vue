@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-dupe-keys */
 <template>
 
  <div >
@@ -221,6 +222,7 @@ data(){
             }]
         },
 
+      // eslint-disable-next-line vue/no-dupe-keys
       fields: [
           {
             key: 'Metric',
@@ -240,6 +242,7 @@ data(){
             variant: 'dark'
           }
         ],
+         // eslint-disable-next-line vue/no-dupe-keys
          items: [
           { isActive: true,  Metric: 'Session', Period: '23500', Rate: '9%' },
           { isActive: false, Metric: 'Connections', Period: '1235',    Rate: '10%' },
