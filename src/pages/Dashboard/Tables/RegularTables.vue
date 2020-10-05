@@ -260,10 +260,10 @@ export default {
            axios.get('http://localhost:3000/api/shipdata', config, )
             .then(function(res) {
               self.shipData = res.data.docs
-              //  console.log(self.shipData)
+               console.log(self.shipData)
               
        }) .catch(function(error) {
-                        console.log(error);
+                       console.log(error);
                     });; 
         },
      fetchFleetbyDate(){
@@ -390,10 +390,6 @@ export default {
         this.fetchData();
         this.fetchFleet();
         this.fetchShip();
-         
-        
-
-      
 
   },
   watch: {

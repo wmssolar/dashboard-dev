@@ -10,8 +10,8 @@ import VectorMapsHeader from 'src/pages/Dashboard/Maps/VectorMapsHeader';
 const Calendar = () =>
   import(/* webpackChunkName: "calendar" */ 'src/pages/Dashboard/Calendar/CalendarRoute.vue');
 // Charts
-const Charts = () =>
-  import(/* webpackChunkName: "charts" */ 'src/pages/Dashboard/Charts.vue');
+// const Charts = () =>
+//   import(/* webpackChunkName: "charts" */ 'src/pages/Dashboard/Charts.vue');
 const Kpis = () =>
   import(/* webpackChunkName: "charts" */ 'src/pages/Dashboard/Kpis.vue');
 // Components pages
@@ -33,7 +33,7 @@ const Typography = () =>
 // Dashboard pages
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */ 'src/pages/Dashboard/Dashboard/Dashboard.vue');
 import Widgets from 'src/pages/Dashboard/Widgets.vue';
-
+// import ParetoChart from 'src/pages/Dashboard/Charts/ParetoChart.vue';
 // Forms pages
 
 // Maps pages
@@ -50,6 +50,10 @@ const VectorMaps = () =>
 // TableList pages
 const RegularTables = () =>
   import(/* webpackChunkName: "tables" */ 'src/pages/Dashboard/Tables/RegularTables.vue');
+
+const ParetoChart = () =>
+  import(/* webpackChunkName: "pareto" */ 'src/pages/Dashboard/Charts/Pareto.vue');
+
 
   let componentsMenu = {
   path: '/components',
@@ -95,6 +99,20 @@ const RegularTables = () =>
   ]
 };
 
+let chartMenu = {
+  path: '/charts',
+  component: DashboardLayout,
+  redirect: '/charts/pareto',
+  name: 'Charts',
+  children: [
+    {
+      path: 'pareto',
+      name: 'Pareto Chart',
+      components: { default: ParetoChart, header: DefaultHeader }
+    },
+ 
+  ]
+};
 
 let tablesMenu = {
   path: '/table-list',
@@ -150,6 +168,7 @@ const routes = [
   componentsMenu,
   tablesMenu,
   mapsMenu,
+  chartMenu,
  
   {
     path: '/',
@@ -167,16 +186,21 @@ const routes = [
         name: 'Calendar',
         components: { default: Calendar, header: CalendarHeader }
       },
-      {
-        path: 'charts',
-        name: 'Charts',
-        components: { default: Charts, header: DefaultHeader }
-      },
+      // {
+      //   path: 'charts',
+      //   name: 'Charts',
+      //   components: { default: Charts, header: DefaultHeader }
+      // },
       {
         path: 'kpis',
         name: 'Kpis',
         components: { default: Kpis, header: DefaultHeader }
       },
+      // {
+      //   path: 'paretochart',
+      //   name: 'ParetoChart',
+      //   components: { default: ParetoChart, header: DefaultHeader }
+      // },
       {
         path: 'widgets',
         name: 'Widgets',
