@@ -1,14 +1,16 @@
- <template>
-<div>
-<fusioncharts
-  :type="type"
-  :width="width"
-  :height="height"
-  :dataFormat="dataFormat"
-  :dataSource="dataSource"
->
-</fusioncharts>
-</div>
+<template>
+<div id="app">
+    <div id="chart-container">
+      <fusioncharts
+            :type="type"
+            :width="width"
+            :height="height"
+            :dataFormat="dataFormat"
+            :dataSource="dataSource"
+          >
+        </fusioncharts>
+    </div>
+</div> 
 </template>
 <script>
 import FusionCharts from "fusioncharts";
@@ -66,59 +68,59 @@ export default {
     height: "100%",
     dataFormat: "json",
     dataSource
-  }),
-  methods: {
+  })
+  // methods: {
 
-      fetchShip(){
-        let self = this;
-                const config = {
-      headers: {'Access-Control-Allow-Origin': '*'}
-          };
-           axios.get('http://localhost:3000/api/shipdata', config, )
-            .then(function(res) {
-              self.shipData = res.data.docs
-               // eslint-disable-next-line no-console
-               console.log(self.shipData)
+  //     fetchShip(){
+  //       let self = this;
+  //               const config = {
+  //     headers: {'Access-Control-Allow-Origin': '*'}
+  //         };
+  //          axios.get('http://localhost:3000/api/shipdata', config, )
+  //           .then(function(res) {
+  //             self.shipData = res.data.docs
+  //              // eslint-disable-next-line no-console
+  //              console.log(self.shipData)
               
-       }) .catch(function(error) {
-                       // eslint-disable-next-line no-console
-                       console.log(error);
-                    });; 
-        },
+  //      }) .catch(function(error) {
+  //                      // eslint-disable-next-line no-console
+  //                      console.log(error);
+  //                   });; 
+  //       },
 
-    byShip(){
-      let sl = this.shipData
-      const t = []
-      const u = []
-       const sh = sl.forEach((name,index)=>{
-         t.push(name.Vessel);
+  //   byShip(){
+  //     let sl = this.shipData
+  //     const t = []
+  //     const u = []
+  //      const sh = sl.forEach((name,index)=>{
+  //        t.push(name.Vessel);
          
-           return name.Vessel;
-          });   
-            if(this.selectFleet === ''){
+  //          return name.Vessel;
+  //         });   
+  //           if(this.selectFleet === ''){
               
-              return [...new Set(t)];
+  //             return [...new Set(t)];
 
-            }else{
+  //           }else{
               
-              const sul = this.shipData.filter((element)=>{
-                  return element.Fleet.match(this.selectFleet)
-              });
-               const sht = sul.forEach((name,index)=>{
-               u.push(name.Vessel);
+  //             const sul = this.shipData.filter((element)=>{
+  //                 return element.Fleet.match(this.selectFleet)
+  //             });
+  //              const sht = sul.forEach((name,index)=>{
+  //              u.push(name.Vessel);
          
-                 return name.Vessel;
-                });
-              return [...new Set(u)];
-          }
-  },
-  mounted() {
+  //                return name.Vessel;
+  //               });
+  //             return [...new Set(u)];
+  //         }
+  // },
+  // mounted() {
    
        
-        this.fetchShip();
+    //     this.fetchShip();
 
-        }
-    }
+    //     }
+    // }
 };
 
 </script>
