@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  webui:
+  dashboard:
     build: .
     image: wmsolar/dashboardv2:latest
     container_name: dashboard

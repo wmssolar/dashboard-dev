@@ -14,12 +14,12 @@
 
 <script>
 
-import FusionCharts from "fusioncharts";
-import Charts from "fusioncharts/fusioncharts.charts";
-import { FCComponent } from "vue-fusioncharts";
+import Vue from 'vue';
+import VueFusionCharts from 'vue-fusioncharts';
+import Chord from 'fusioncharts/fusioncharts.powercharts';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.candy';
 
-// Resolves charts dependency
-Charts(FusionCharts);
+Vue.use(VueFusionCharts, FusionCharts, FusionTheme, Chord)
 
 const dataSource = {
   chart: {

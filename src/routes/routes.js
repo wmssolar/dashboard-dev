@@ -196,11 +196,6 @@ const routes = [
         name: 'Kpis',
         components: { default: Kpis, header: DefaultHeader }
       },
-      // {
-      //   path: 'paretochart',
-      //   name: 'ParetoChart',
-      //   components: { default: ParetoChart, header: DefaultHeader }
-      // },
       {
         path: 'widgets',
         name: 'Widgets',

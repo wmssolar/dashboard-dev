@@ -177,11 +177,12 @@ export default {
     VueBootstrap4Table
    
      
-  },computed: {
+  },
+  computed: {
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */   
-    queriedData() {
+  queriedData() {
       let result = this.stores;
      
         if (this.selectFleet === '')
@@ -196,9 +197,6 @@ export default {
          if(this.selectShips === '')
         {
           return hl
-
-         
-          
         } else {
 
              const sh = this.stores.filter((element)=>{
@@ -247,8 +245,7 @@ export default {
                 this.queryParams = queryParams;
                 this.fetchData();
                 this.fetchFleetbyDate();
-                
-                
+              
                   
             },
       
@@ -260,9 +257,11 @@ export default {
            axios.get('http://localhost:3000/api/shipdata', config, )
             .then(function(res) {
               self.shipData = res.data.docs
+               // eslint-disable-next-line no-console
                console.log(self.shipData)
               
        }) .catch(function(error) {
+                       // eslint-disable-next-line no-console
                        console.log(error);
                     });; 
         },
@@ -278,9 +277,11 @@ export default {
     axios.get(`http://localhost:3000/api/solarbydate/${this.selectFleet}/${this.start_date.toISOString()}/${this.end_date.toISOString()}`, config, )
             .then(function(res) {
                
+             // eslint-disable-next-line no-console
              console.log(res.data)
               
        }) .catch(function(error) {
+                        // eslint-disable-next-line no-console
                         console.log(error);
                     });; 
       },
@@ -295,6 +296,7 @@ export default {
                
               
        }) .catch(function(error) {
+                        // eslint-disable-next-line no-console
                         console.log(error);
                     });; 
       },
@@ -324,6 +326,7 @@ export default {
                       
                     }) 
                     .catch(function(error) {
+                        // eslint-disable-next-line no-console
                         console.log(error);
                     });
                     

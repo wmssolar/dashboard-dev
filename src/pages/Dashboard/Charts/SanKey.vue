@@ -9,12 +9,12 @@
 
 </template>
 <script>
-import FusionCharts from "fusioncharts";
-import Charts from "fusioncharts/fusioncharts.charts";
-import { FCComponent } from "vue-fusioncharts";
+import Vue from 'vue';
+import VueFusionCharts from 'vue-fusioncharts';
+import Sankey from 'fusioncharts/fusioncharts.powercharts';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.candy';
 
-// Resolves charts dependency
-Charts(FusionCharts);
+Vue.use(VueFusionCharts, FusionCharts, FusionTheme, Sankey)
 
 const dataSource = {
   chart: {
@@ -196,13 +196,11 @@ const dataSource = {
 };
 
 export default {
-  components: {
-    fusioncharts: FCComponent
-  },
+
   data: () => ({
     type: "sankey",
-    width: "100%",
-    height: "100%",
+    width: "600",
+    height: "400",
     dataFormat: "json",
     dataSource
   })
