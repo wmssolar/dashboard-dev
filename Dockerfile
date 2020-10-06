@@ -1,4 +1,4 @@
-FROM wmsolar/dashboardv2:latest
+FROM wmsolar/dashboard:latest
 
 #  Create app directory
 WORKDIR  /usr/src/dashbd

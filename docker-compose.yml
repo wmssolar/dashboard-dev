@@ -2,7 +2,7 @@ version: '3.8'
 services:
   dashboard:
     build: .
-    image: wmsolar/dashboardv2:latest
+    image: wmsolar/dashboard:latest
     container_name: dashboard
     networks:
       - overlay
