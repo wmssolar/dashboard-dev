@@ -7,7 +7,7 @@
           </div>
     </div>
 
-  <el-select class="select-danger" 
+<el-select class="select-danger" 
   placeholder="Select Fleet" 
   v-model="selectFleet"
    @on-change-query="onChangeQuery">
@@ -203,10 +203,10 @@ export default {
                 return element.Ship.match(this.selectShips)
            });
 
-              if(this.value === '')
-              {   
-                   return sh
-              }else {
+        if(this.value === '')
+        {   
+             return sh
+        }else {
             
                 var startdate = this.start_date;
                 var enddate = this.end_date; 
@@ -298,7 +298,7 @@ export default {
        }) .catch(function(error) {
                         // eslint-disable-next-line no-console
                         console.log(error);
-                    });; 
+                    });
       },
     fetchData() {
                 let self = this;
@@ -322,7 +322,8 @@ export default {
                            
                         self.rows = response.data.data;
                        
-                     
+                     // eslint-disable-next-line no-console
+                     console.log(self.rows)
                       
                     }) 
                     .catch(function(error) {
@@ -333,7 +334,7 @@ export default {
                  
                     
         },
-        dateInterval(){
+    dateInterval(){
              var startdate = this.value;
               var enddate = this.value1;
               const dt =  this.stores.filter((element)=>{
@@ -352,6 +353,7 @@ export default {
     byFleet(){
       let fl = this.FleetData 
       const t = []
+  
       const Fleet = fl.forEach((name,index)=>{
          t.push(name.Fleet);
            return name.Fleet;
@@ -359,7 +361,7 @@ export default {
       return [...new Set(t)];
       
     },
-    byShip(){
+byShip(){
       let sl = this.shipData
       const t = []
       const u = []
@@ -372,7 +374,7 @@ export default {
               
               return [...new Set(t)];
 
-            }else{
+      }else{
               
               const sul = this.shipData.filter((element)=>{
                   return element.Fleet.match(this.selectFleet)

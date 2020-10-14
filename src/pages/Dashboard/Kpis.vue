@@ -4,11 +4,12 @@
  <div >
 
   <b-card-group deck>
-     <b-card bg-variant="dark" style="height: 799px;">
+    <b-card bg-variant="dark" style="height: 799px;">
       <b-table
       striped
       :items="items"
-      :fields="fields"></b-table>
+      :fields="fields">
+      </b-table>
 
     </b-card>
 
@@ -62,7 +63,7 @@
       </fusioncharts>
     </b-card>
     <b-card bg-variant="dark">
-          <b-table
+    <b-table
       :items="items"
       :fields="fields"
       :sort-by.sync="sortBy"
