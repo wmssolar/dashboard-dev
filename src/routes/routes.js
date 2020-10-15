@@ -51,8 +51,8 @@ const VectorMaps = () =>
 const RegularTables = () =>
   import(/* webpackChunkName: "tables" */ 'src/pages/Dashboard/Tables/RegularTables.vue');
 
-const ParetoChart = () =>
-  import(/* webpackChunkName: "pareto" */ 'src/pages/Dashboard/Charts/Pareto.vue');
+const Assorted = () =>
+  import(/* webpackChunkName: "pareto" */ 'src/pages/Dashboard/Charts/Assorted.vue');
 
 
   let componentsMenu = {
@@ -102,13 +102,13 @@ const ParetoChart = () =>
 let chartMenu = {
   path: '/charts',
   component: DashboardLayout,
-  redirect: '/charts/pareto',
+  redirect: '/charts/assorted',
   name: 'Charts',
   children: [
     {
-      path: 'pareto',
-      name: 'Pareto Chart',
-      components: { default: ParetoChart, header: DefaultHeader }
+      path: 'assorted',
+      name: 'Assorted Charts',
+      components: { default: Assorted, header: DefaultHeader }
     },
  
   ]

@@ -1,24 +1,28 @@
 import Vue from 'vue';
+ 
 import VueRouter from 'vue-router';
 import DashboardPlugin from './dashboard-plugin';
-import VueApexCharts from 'vue-apexcharts'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
-import VueFusionCharts from 'vue-fusioncharts';
-import FusionCharts from 'fusioncharts';
-import Column2D from 'fusioncharts/fusioncharts.charts';
-import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import Highcharts from 'highcharts'
+import HighchartsVue from 'highcharts-vue'
 
 
-Vue.use(VueFusionCharts, FusionCharts, Column2D, FusionTheme);
+Vue.use(HighchartsVue, {
+	highcharts: Highcharts
+})
 
+
+Vue.use(ElementUI);
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
-Vue.component('apexchart', VueApexCharts)
-
+// Vue.component('apexchart', VueApexCharts)
 // Plugins
 import App from './App.vue';
 
@@ -30,7 +34,6 @@ import routes from './routes/routes';
 Vue.use(VueRouter);
 Vue.use(DashboardPlugin);
 
-
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes
@@ -41,5 +44,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   render: h => h(App),
-  router
+  router,
+  
 });
