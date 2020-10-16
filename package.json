@@ -8,7 +8,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start-server": "npm run serve",
+    "start-server": "npm run serve --open --hotload",
     "test": "mocha",
     "ci": "start-server-and-test start-server http://localhost:8080 test"
   },
