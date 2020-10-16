@@ -1,14 +1,14 @@
 version: '3.8'
 services:
-  webui:
+  dashboard:
     build: .
-    image: wmsolar/dashboardv2:latest
+    image: wmsolar/dashboard:latest
     container_name: dashboard
     networks:
       - overlay
     privileged: true
     ports:
-      - "8080:8080"
+      - "8000:8000"
     working_dir: /usr/src/dashbd
     volumes:
       - .:/usr/scr/dashbd

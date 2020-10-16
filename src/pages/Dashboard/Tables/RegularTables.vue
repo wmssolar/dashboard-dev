@@ -7,7 +7,7 @@
           </div>
     </div>
 
-  <el-select class="select-danger" 
+<el-select class="select-danger" 
   placeholder="Select Fleet" 
   v-model="selectFleet"
    @on-change-query="onChangeQuery">
@@ -177,11 +177,12 @@ export default {
     VueBootstrap4Table
    
      
-  },computed: {
+  },
+  computed: {
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */   
-    queriedData() {
+  queriedData() {
       let result = this.stores;
      
         if (this.selectFleet === '')
@@ -196,19 +197,16 @@ export default {
          if(this.selectShips === '')
         {
           return hl
-
-         
-          
         } else {
 
              const sh = this.stores.filter((element)=>{
                 return element.Ship.match(this.selectShips)
            });
 
-              if(this.value === '')
-              {   
-                   return sh
-              }else {
+        if(this.value === '')
+        {   
+             return sh
+        }else {
             
                 var startdate = this.start_date;
                 var enddate = this.end_date; 
@@ -247,8 +245,7 @@ export default {
                 this.queryParams = queryParams;
                 this.fetchData();
                 this.fetchFleetbyDate();
-                
-                
+              
                   
             },
       
@@ -260,10 +257,12 @@ export default {
            axios.get('http://localhost:3000/api/shipdata', config, )
             .then(function(res) {
               self.shipData = res.data.docs
-              //  console.log(self.shipData)
+               // eslint-disable-next-line no-console
+               console.log(self.shipData)
               
        }) .catch(function(error) {
-                        console.log(error);
+                       // eslint-disable-next-line no-console
+                       console.log(error);
                     });; 
         },
      fetchFleetbyDate(){
@@ -278,9 +277,11 @@ export default {
     axios.get(`http://localhost:3000/api/solarbydate/${this.selectFleet}/${this.start_date.toISOString()}/${this.end_date.toISOString()}`, config, )
             .then(function(res) {
                
+             // eslint-disable-next-line no-console
              console.log(res.data)
               
        }) .catch(function(error) {
+                        // eslint-disable-next-line no-console
                         console.log(error);
                     });; 
       },
@@ -295,8 +296,9 @@ export default {
                
               
        }) .catch(function(error) {
+                        // eslint-disable-next-line no-console
                         console.log(error);
-                    });; 
+                    });
       },
     fetchData() {
                 let self = this;
@@ -320,17 +322,19 @@ export default {
                            
                         self.rows = response.data.data;
                        
-                     
+                     // eslint-disable-next-line no-console
+                     console.log(self.rows)
                       
                     }) 
                     .catch(function(error) {
+                        // eslint-disable-next-line no-console
                         console.log(error);
                     });
                     
                  
                     
         },
-        dateInterval(){
+    dateInterval(){
              var startdate = this.value;
               var enddate = this.value1;
               const dt =  this.stores.filter((element)=>{
@@ -349,6 +353,7 @@ export default {
     byFleet(){
       let fl = this.FleetData 
       const t = []
+  
       const Fleet = fl.forEach((name,index)=>{
          t.push(name.Fleet);
            return name.Fleet;
@@ -356,7 +361,7 @@ export default {
       return [...new Set(t)];
       
     },
-    byShip(){
+byShip(){
       let sl = this.shipData
       const t = []
       const u = []
@@ -369,7 +374,7 @@ export default {
               
               return [...new Set(t)];
 
-            }else{
+      }else{
               
               const sul = this.shipData.filter((element)=>{
                   return element.Fleet.match(this.selectFleet)
@@ -390,10 +395,6 @@ export default {
         this.fetchData();
         this.fetchFleet();
         this.fetchShip();
-         
-        
-
-      
 
   },
   watch: {

@@ -14,7 +14,7 @@
                     <h3 class="info-title">
                       <animated-number :value="32"></animated-number>
                     </h3>
-                    <h6 class="stats-title">Fleet</h6>
+                    <h6 class="stats-title">Fleets</h6>
                   </div>
                 </div>
               </div>
