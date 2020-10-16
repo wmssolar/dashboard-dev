@@ -11,8 +11,6 @@ RUN npm install && \
     yum clean all && \
     rm -rf /var/cache/yum 
 
- 
-
 COPY . .
 
 EXPOSE 8000
