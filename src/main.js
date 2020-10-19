@@ -22,8 +22,7 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
-// Vue.component('apexchart', VueApexCharts)
-// Plugins
+
 import App from './App.vue';
 
 
@@ -39,6 +38,8 @@ const router = new VueRouter({
   routes, // short for routes: routes
   linkActiveClass: 'active'
 });
+
+export const serverBus = new Vue();
 
 /* eslint-disable no-new */
 new Vue({

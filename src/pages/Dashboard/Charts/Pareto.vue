@@ -85,7 +85,7 @@ const data = {
         name: 'QOS',
         type: 'column',
         zIndex: 2,
-        data: [700000,300000,100000,2000]
+        data: []
     }]
 }
 export default {
@@ -102,55 +102,29 @@ export default {
     };
   },
  
-  async created() {
-    await this.fetchPareto();
-    
-  },
-  methods: {
-
-   fetchPareto(){
-
+  async mounted() {
+     
     const api_url = 'http://localhost:3000/api/qos';    
       // let self = this
-     
+    // eslint-disable-next-line no-console
+                // console.log(this.options.series[1].data)      
+    
       const config = { headers: {'Access-Control-Allow-Origin': '*'} };
-      axios.get(api_url).then(response => {
-            this.hold_data = []
-              this.hold_data = [response.data.docs[0].Latency,
-                                            response.data.docs[0].PacketLoss, 
-                                            response.data.docs[0].MOS,
-                                            response.data.docs[0].Jitter  ]
-
-              console.log(response.data.docs[0].Latency,
-                                            response.data.docs[0].PacketLoss, 
-                                            response.data.docs[0].MOS,
-                                            response.data.docs[0].Jitter )
-                console.log(this.hold_data)
-      }).
-      catch((error) => console.log(error));
-  
-
- 
-      // const sh = self.options.series[1].data
-     
-      // axios.get(api_url).then((response) => {
-      //         self.chdata  = response.data.docs
-      //          const datastore = self.chdata ;
-      
-      //   const t = []
-      //     for (let key in datastore) {
-      //           const s = datastore[key]
-      //         t.push(s.Latency, s.PacketLoss,s.MOS,s.Jitter)}
-      //              self.hold_data = t 
+ await axios.get(api_url, config).then(response => {
              
-      //        console.log(self.hold_data)
-          
-      //         }).catch(function(error) {
-      //                  // eslint-disable-next-line no-console
-      //                  console.log(error);
-      //  });
-      
-      }
-   },
+               this.options.series[1].data = [response.data.docs[0].Latency,
+                                            response.data.docs[0].PacketLoss, 
+                                            response.data.docs[0].MOS,
+                                            response.data.docs[0].Jitter]
+               // eslint-disable-next-line no-console
+                console.log(this.options.series[1].data)
+              
+              }).
+              // eslint-disable-next-line no-console
+              catch((error) => console.log(error));
+     
+
+  },
+ 
 };
 </script>

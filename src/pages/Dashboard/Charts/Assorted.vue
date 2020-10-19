@@ -3,7 +3,7 @@
        
    <b-card-group deck>
     <b-card bg-variant="dark" style="height: 500px; width: 200px;">
-     <ThreeD> </ThreeD>    
+     <Pareto> </Pareto>    
    </b-card>
 
   <b-card bg-variant="dark" style="height: 500px; width: 200px;">
@@ -13,9 +13,11 @@
      <b-card bg-variant="dark" style="height: 500px; width: 200px;">
      <Gantt> </Gantt>      
    </b-card>
+
+     <!-- <b-card bg-variant="dark" style="height: 500px; width: 200px;">
+    <Networkgraph></Networkgraph>     
+   </b-card> -->
    </b-card-group>
-
-
   </div>
   
 </template>
@@ -24,17 +26,19 @@
   
  
  
- import ThreeD from './ThreeD'
+ import Pareto from './Pareto'
  import Bubble from './Bubble'
 import Gantt from './Gantt'
+// import Networkgraph from './Networkgraph'
  
 export default {
    
   components: {
  
-    ThreeD,
+    Pareto,
     Bubble,
-    Gantt
+    Gantt,
+    // Networkgraph
 
 
   },

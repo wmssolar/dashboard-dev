@@ -71,15 +71,14 @@
 <script>
 
 import { Table, TableColumn, DatePicker, Select, Option  } from 'element-ui';
- 
+ import { serverBus } from '../../../main';
 
 import axios from 'axios'
  
 import VueBootstrap4Table from 'vue-bootstrap4-table'
 
 export default {
-
-
+ emit: ['information'],
   data() {
     return {
       selectFleet: [],
@@ -180,7 +179,8 @@ export default {
   },
   computed: {
     /***
-     * Returns a page from the searched data or the whole data. Search is performed in the watch section below
+     * Returns a page from the searched data or the whole data.
+     *  Search is performed in the watch section below
      */   
   queriedData() {
       let result = this.stores;
@@ -212,10 +212,7 @@ export default {
                 var enddate = this.end_date; 
                  const dt =  this.stores.filter((element)=>{
                 var date = element.Date_sp
-                // console.log(date)
-                // console.log(startdate.toISOString())
-                // console.log(enddate.toISOString())
-                // return element.Date_sp.match(this.value1)
+                
                  return (date >= startdate && enddate >= date); 
 
               })
@@ -234,17 +231,18 @@ export default {
 
       }
       
-    },
+    }
  
    
   },
 
   methods: {
    
+    
     onChangeQuery(queryParams) {
                 this.queryParams = queryParams;
                 this.fetchData();
-                this.fetchFleetbyDate();
+                // this.fetchFleetbyDate();
               
                   
             },
@@ -271,8 +269,8 @@ export default {
       headers: {'Access-Control-Allow-Origin': '*'}
           };
 
-     const starts = '2020-02-15T17:00:00.000Z'
-    const ends = '2020-02-17T17:00:00.000Z'
+    //  const starts = '2020-02-15T17:00:00.000Z'
+    // const ends = '2020-02-17T17:00:00.000Z'
     // console.log(this.start_date)
     axios.get(`http://localhost:3000/api/solarbydate/${this.selectFleet}/${this.start_date.toISOString()}/${this.end_date.toISOString()}`, config, )
             .then(function(res) {
@@ -392,7 +390,7 @@ byShip(){
   },
   mounted() {
    
-        this.fetchData();
+        // this.fetchData();
         this.fetchFleet();
         this.fetchShip();
 
