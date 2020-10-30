@@ -26,10 +26,7 @@
           </sidebar-item>
       
 
-      <sidebar-item :link="{name: 'Excel Editor', icon: 'now-ui-icons education_agenda-bookmark'}">
-          <sidebar-item :link="{name: 'Excel Editor', path: 'tables/exceleditor'}">
-          </sidebar-item>
-         </sidebar-item>
+   
 
 
         <!-- <sidebar-item :link="{name: 'Maps', icon: 'now-ui-icons location_pin'}">

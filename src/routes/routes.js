@@ -50,8 +50,7 @@ const VectorMaps = () =>
 // TableList pages
 const RegularTables = () =>
   import(/* webpackChunkName: "tables" */ 'src/pages/Dashboard/Tables/RegularTables.vue');
-  const ExcelEditor = () =>
-  import(/* webpackChunkName: "Excel" */ 'src/pages/Dashboard/Tables/ExcelEditor.vue');
+
 
 const Assorted = () =>
   import(/* webpackChunkName: "pareto" */ 'src/pages/Dashboard/Charts/Assorted.vue');
@@ -118,21 +117,6 @@ let chartMenu = {
 
 
 
-let excelMenu = {
-  path: '/tables',
-  component: DashboardLayout,
-  redirect: '/tables/exceleditor',
-  name: 'Excel',
-  children: [
-    {
-      path: 'exceleditor',
-      name: 'Excel Editor',
-      components: { default: ExcelEditor, header: DefaultHeader }
-    },
- 
-  ]
-};
-
 
 let tablesMenu = {
   path: '/table-list',
@@ -188,7 +172,7 @@ const routes = [
   },
   componentsMenu,
   tablesMenu,
-  excelMenu,
+
   chartMenu,
  
   {

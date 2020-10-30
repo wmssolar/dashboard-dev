@@ -130,6 +130,7 @@ export default {
                           this.options.series[1].data = this.paretoData
                         }) 
       .catch( (error) =>  {
+        // eslint-disable-next-line no-console
         console.log(error)
       }) 
 

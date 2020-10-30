@@ -1,7 +1,7 @@
 <template>
  <div>
     <b-card-group deck style="height: 1000px; width: 1300px;">
-          <b-card bg-variant="dark"  style="height: 1000px; width: 1100px;">
+    <b-card bg-variant="dark"  style="height: 1000px; width: 1100px;">
           <el-select placeholder="Select Fleet" v-model="selectFleet" @on-change-query="onChangeQuery">
             <el-option dark 
             v-for="(item, index) in byFleet()" :key="index"
@@ -29,7 +29,7 @@
                   @on-change-query="onChangeQuery"> 
                   </b-table> 
                 </b-card>
- 
+        </b-card>
          <b-card bg-variant="dark" style="height: 500px; width: 650px;">
             <Bubble></Bubble>
         </b-card>
