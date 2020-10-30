@@ -1,6 +1,7 @@
 <template>
   <section class="charts">
-  <div id="container" style="height: 400px">
+    <div v-if="loading">Loading...</div>
+  <div v-if="paretoData" id="container" style="height: 400px">
     <vue-highcharts
       :options="options"
       :highcharts="Highcharts"
@@ -8,123 +9,133 @@
   </div>
   </section>
 </template>
+
 <script>
-import VueHighcharts from "vue2-highcharts";
-import axios from 'axios'
-import Pareto from "highcharts/modules/pareto"
-import Highcharts, { dateFormat } from "highcharts";
-import darkUnica from "highcharts/themes/dark-unica";
-darkUnica(Highcharts)
-
-Pareto(Highcharts);
+  import VueHighcharts from "vue2-highcharts"
+  import axios from 'axios'
+  import Pareto from "highcharts/modules/pareto"
+  import Highcharts, { dateFormat } from "highcharts"
+  import darkUnica from "highcharts/themes/dark-unica"
+  
+  darkUnica(Highcharts)
+  Pareto(Highcharts)
  
-
-const data = {
-  chart: {
-    renderTo: "container",
-    type: "column",
-
-     spacingBottom: 15,
-     spacingTop: 10,
-     spacingLeft: 10,
-     spacingRight: 10,
-   
-  },
-  title: {
-    text: "Quality of Service above Threshods"
-  },
-  subtitle: {
-    text: "Occurrence of metrics exceeding the threshold"
-  },
-  plotOptions: {
-    column: {
-      depth: 25
-    }
-  },
-  tooltip: {
-        shared: true
-    },
-   xAxis: {
-        categories: [
-            'Latency',
-            'PacketLoss',
-            'MOS',
-            'Jitter'
-          
-        ],
-        crosshair: true
-    },
-  yAxis: [{
-        title: {
-            text: ''
-        }
-    }, {
-        title: {
-            text: ''
-        },
-        minPadding: 10,
-        maxPadding: 10,
-        max: 100,
-        min: 0,
-        opposite: true,
-        labels: {
-            format: "{value}%"
-        }
-    }],
- series: [{
-        type: 'pareto',
-        name: 'Pareto',
-        yAxis: 1,
-        zIndex: 10,
-        baseSeries: 1,
-        tooltip: {
-            valueDecimals: 2,
-            valueSuffix: '%'
-        }
-    }, {
-        name: 'QOS',
-        type: 'column',
-        zIndex: 2,
-        data: []
-    }]
-}
+  const paretoData = null
+  
 export default {
+  
   components: {
     VueHighcharts
   },
+
   data() {
     return {
-      options: data,
+      loading: false,
+      paretoData: null,
       Highcharts,
       datastore: [],
-      chdata: [],
-      hold_data: []
-    };
-  },
- 
-  async mounted() {
-     
-    const api_url = 'http://localhost:3000/api/qos';    
-      // let self = this
-    // eslint-disable-next-line no-console
-                // console.log(this.options.series[1].data)      
-    
-      const config = { headers: {'Access-Control-Allow-Origin': '*'} };
- await axios.get(api_url, config).then(response => {
-             
-               this.options.series[1].data = [response.data.docs[0].Latency,
-                                            response.data.docs[0].PacketLoss, 
-                                            response.data.docs[0].MOS,
-                                            response.data.docs[0].Jitter]
-               // eslint-disable-next-line no-console
-                console.log(this.options.series[1].data)
-              
-              }).
-              // eslint-disable-next-line no-console
-              catch((error) => console.log(error));
-     
 
+      options: Highcharts.merge(this.options, {
+        chart: {
+          renderTo: "container",
+          type: "column",
+
+          spacingBottom: 15,
+          spacingTop: 10,
+          spacingLeft: 10,
+          spacingRight: 10,
+        
+        },
+        title: {
+          text: "Quality of Service above Threshods -CF"
+        },
+        subtitle: {
+          text: "Number of occurrence"
+        },
+        plotOptions: {
+          column: {
+            depth: 25
+          }
+        },
+        tooltip: {
+              shared: true
+        },
+        xAxis: {
+            categories: [
+                'Latency',
+                'PacketLoss',
+                'MOS',
+                'Jitter'
+            ],
+            crosshair: true
+        },
+        yAxis: [{
+            title: {
+                text: ''
+            }
+        }, 
+        {
+          title: {
+              text: ''
+          },
+          minPadding: 10,
+          maxPadding: 10,
+          max: 100,
+          min: 0,
+          opposite: true,
+          labels: {
+              format: "{value}%"
+          }
+        }],
+        series: [{
+                type: 'pareto',
+                name: 'Pareto',
+                yAxis: 1,
+                zIndex: 10,
+                baseSeries: 1,
+                tooltip: {
+                    valueDecimals: 2,
+                    valueSuffix: '%'
+                }
+            }, 
+            {
+                name: 'QOS',
+                type: 'column',
+                zIndex: 2,
+                data: paretoData
+            }]
+      })
+    }
   },
+  created() {
+     this.getParetoData()                                                      
+  },
+  watch: {
+    '$route': 'getParetoData'
+  },
+  methods: {
+    getParetoData() {
+
+      const api_url = 'http://localhost:3000/api/qos'    
+      const config = { headers: {'Access-Control-Allow-Origin': '*'} }
+      
+      axios.get(api_url, config)
+      .then(response => { this.paretoData = [ response.data.docs[0].Latency,
+                                              response.data.docs[0].PacketLoss, 
+                                              response.data.docs[0].MOS,
+                                              response.data.docs[0].Jitter 
+                                            ]
+                                                                                
+                          //console.log(this.paretoData)
+                          this.options.series[1].data = this.paretoData
+                        }) 
+      .catch( (error) =>  {
+        console.log(error)
+      }) 
+
+    }
+  }
  
-};
+}
 </script>
+

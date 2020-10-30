@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="1"
+            tests="1">
+
+  <testsuite name="browserTest"
+    errors="1" failures="1" hostname="" id="" package="browserTest" skipped="0"
+    tests="1" time="5.244" timestamp="">
+  
+    <testcase name="Demo test dashboard" classname="browserTest" time="5.244" assertions="1">  <failure message="Testing if element &lt;#main&gt; has css class &#39;container&#39; in 5000ms - expected &#34;has container&#34; but got: &#34;element could not be located&#34; (5070ms)">    at Object.Demo test dashboard (/home/cdh/dashboard-dev-testing/tests/browserTest.js:5:17)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)</failure>
+
+    
+    <error message="Error while running &#34;cssClassPresent&#34; command: Testing if element [0;33m&lt;#main&gt;[0m has css class [0;33m&#39;container&#39;[0m in 5000ms - expected [0;32m&#34;has container&#34;[0m but got: [0;31m&#34;element could not be located&#34;[0m [0;90m(5070ms)[0m" type="error"><![CDATA[
+        at Object.Demo test dashboard (/home/cdh/dashboard-dev-testing/tests/browserTest.js:5:17)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    ]]></error>
+    
+    </testcase>
+  
+
+  
+    <system-err>
+        NoSuchElementError: An error occurred while running .getAttribute() command on &lt;#main&gt;: 
+   {&#34;sessionId&#34;:&#34;b728f4d9ed4b75e997955ac64fe9c84e&#34;,&#34;status&#34;:0,&#34;value&#34;:[]}
+       at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    </system-err>
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

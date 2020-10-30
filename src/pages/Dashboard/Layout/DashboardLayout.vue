@@ -7,35 +7,41 @@
         <sidebar-item :link="{name: 'Dashboard', icon: 'now-ui-icons design_app', path: '/dashboard'}">
         </sidebar-item>
      
-       
-        <sidebar-item :link="{name: 'Tables', icon: 'now-ui-icons design_bullet-list-67'}">
+   <sidebar-item :link="{name: 'Tables', icon: 'now-ui-icons design_bullet-list-67'}">
           <sidebar-item :link="{name: 'Regular Tables', path: '/table-list/regular'}">
           </sidebar-item>
-     </sidebar-item>
+         </sidebar-item>
+
+       
+  
 
     <sidebar-item :link="{name: 'Charts', icon: 'now-ui-icons business_chart-pie-36'}">
       <sidebar-item :link="{name: 'Assorted', path: '/charts/assorted'}">
       </sidebar-item>
      </sidebar-item>
 
+         <sidebar-item :link="{name: 'Kpis', icon: 'now-ui-icons business_briefcase-24', path: '/kpis'}">
+           <sidebar-item :link="{name: 'Kpis', path: '/kpis'}">
+          </sidebar-item>
+          </sidebar-item>
+      
 
-       <!-- <sidebar-item :link="{name: 'Charts', icon: 'now-ui-icons business_chart-pie-36'}">
-      <sidebar-item :link="{name: 'Pareto', path: '/charts/pareto'}">
-      </sidebar-item>
-     </sidebar-item> -->
+      <sidebar-item :link="{name: 'Excel Editor', icon: 'now-ui-icons education_agenda-bookmark'}">
+          <sidebar-item :link="{name: 'Excel Editor', path: 'tables/exceleditor'}">
+          </sidebar-item>
+         </sidebar-item>
 
-        <sidebar-item :link="{name: 'Maps', icon: 'now-ui-icons location_pin'}">
+
+        <!-- <sidebar-item :link="{name: 'Maps', icon: 'now-ui-icons location_pin'}">
          
           <sidebar-item :link="{name: 'Vector Maps', path: '/maps/vector-map'}"></sidebar-item>
-        </sidebar-item>
+        </sidebar-item> -->
         <!-- <sidebar-item
           :link="{name: 'Widgets', icon: 'now-ui-icons business_briefcase-24', path: '/widgets'}"></sidebar-item> -->
-           <sidebar-item
-          :link="{name: 'Kpis', icon: 'now-ui-icons business_briefcase-24', path: '/kpis'}"></sidebar-item>
-      
-        <sidebar-item
+         
+        <!-- <sidebar-item
           :link="{name: 'Calendar', icon: 'now-ui-icons media-1_album', path: '/calendar'}">
-          </sidebar-item>
+          </sidebar-item> -->
 
       </template>
     </side-bar>

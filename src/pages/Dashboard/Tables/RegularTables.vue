@@ -4,64 +4,106 @@
       <card card-body-classes="table-full-width" >
         <div slot="header">
           <div class="col-md-2 offset-md-10">
+        <download-excel 
+          :data = "rows_data"
+          name = "Download.xls">
+          <el-button type="primary" icon="el-icon-edit" circle></el-button>
+          </download-excel>
           </div>
     </div>
 
-<el-select class="select-danger" 
-  placeholder="Select Fleet" 
-  v-model="selectFleet"
-   @on-change-query="onChangeQuery">
-    <el-option dark 
-    v-for="(item, index) in byFleet()" :key="index"
-    :label="`${item.toString()}`"
-    :value="item"
-    >   
-    </el-option>
-  </el-select>
 
-  <el-select class="select-danger" placeholder="Select Ship" v-model="selectShips"
-   @on-change-query="onChangeQuery">
-    <el-option dark v-for="(item, index) in byShip()" :key="index"
-    :label="`${item.toString()}`"
-    :value="item">
-        
-    </el-option>
-  </el-select>
 
   <h4 slot="header" class="card-title"></h4>
-    <div class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap">
+    <div class="col-12 d-flex justify-content-center justify-content-sm-between" >
     </div>
-    
-    <div class="col-md-3">
-      <fg-input>
-         <el-date-picker
-              v-model="start_date"
-              type="date"
-              placeholder="Pick a Date"
-              format="yyyy/MM/dd">
-           </el-date-picker>
-           
+
+
+          <el-select class="select-danger" 
+            placeholder="Select Fleet" 
+            v-model="selectFleet"
+            clearable="true"
+        
+            >
+              <el-option dark 
+              v-for="(item, index) in byFleet()" :key="index"
+              :label="`${item.toString()}`"
+              :value="item"
+              >   
+              </el-option>
+            </el-select>
+
+        <el-select class="select-danger" 
+        placeholder="Select Ship" 
+        v-model="selectShips"
+        clearable="true"
+     
+        >
+          <el-option dark v-for="(item, index) in byShip()" :key="index"
+          :label="`${item.toString()}`"
+          :value="item"
+           >
+              
+          </el-option>
+        </el-select>
+       
+     
+      
+    <br>
+     <div class="col-md-3">
+                <fg-input>
+                  <el-date-picker
+                        v-model="start_date"
+                        clearable="true"
+                        type="date"
+                        placeholder="Pick a Date"
+                        format="yyyy/MM/dd"
+                        default-value=""
+                       >
+                    </el-date-picker>
+                    
       </fg-input>
      </div>
      <div class="col-md-3">
       <fg-input>
          <el-date-picker
               v-model="end_date"
+              clearable="true"
               type="date"
               placeholder="Pick a Date"
-              format="yyyy/MM/dd">
-           </el-date-picker>
+              format="yyyy/MM/dd"
+              >
+     </el-date-picker>
            
       </fg-input>
-     </div>
+      <br>
 
+       
+
+   
+     <div class="col-12 d-flex justify-content-center justify-content-sm-between">
+        <el-button type="primary" round icon="el-icon-search" 
+      v-on:click="searchMethod()">Search</el-button>
      
+ 
+  <el-divider direction="vertical"></el-divider>
+      <el-button type="dark" round icon="el-icon-refresh" 
+      v-on:click="forceRerender()">Reload</el-button>
+       </div>
+       
+     </div>
+     
+   
+   
       <vue-bootstrap4-table 
-         :rows="queriedData" 
+         :rows="rows" 
          :columns="columns" 
          :config="config"
         @on-change-query="onChangeQuery"
-        :total-rows="total_rows">
+        :total-rows="total_rows"
+      
+        >
+             
         </vue-bootstrap4-table>
     
       </card>
@@ -71,26 +113,22 @@
 <script>
 
 import { Table, TableColumn, DatePicker, Select, Option  } from 'element-ui';
- import { serverBus } from '../../../main';
 
 import axios from 'axios'
  
 import VueBootstrap4Table from 'vue-bootstrap4-table'
+import moment from 'moment';
+import { select } from 'd3';
 
 export default {
- emit: ['information'],
+     
   data() {
     return {
-      selectFleet: [],
-      selectShips: [],
+      selectFleet: null,
+      selectShips: null,
       stores: [],
-      stored: [],
-      searchedData: [],
-      DatabyId: [],
-      FleetDate: [],
-      CruiseLine: [],
       FleetData: [],
-      pageData: [],
+      store_rowData: [],
       shipData:[],
            rows:[],
           columns: [{
@@ -115,7 +153,8 @@ export default {
                     },
                     {
                         label: "Date",
-                        name: "Date_sp",
+                        name: "Date",
+                        initial_sort: true,
                         
                     },
                      {
@@ -149,21 +188,36 @@ export default {
                         
                     }
             ],
-      start_date: '',
-      end_date: '',
-      queryParams: {
-                    
-                    limit: 10,
+    
+        rows_data: [],
+        start_date: '',
+        end_date: '',
+         totalCount: [],
+         queryParams: {
                     page: 1,
+                    limit: 25,
+                     totalDocs: 0,
+              totalPages: 0,
+              pagingCounter: 1,
+              hasPrevPage: false,
+              hasNextPage: true,
+              prevPage: null,
+              nextPage: 2     
                 },
       total_rows: 0,
       config: {
                     
-                    card_title: "Fleet  Data",
+                    // card_title: "Fleet  Data",
+                    loaderText: 'Updating...',
+                     pagination: true,
                     server_mode: true, 
+                    num_of_visibile_pagination_buttons: 8,
                     per_page_options: [],
-              }
-      
+                    show_refresh_button: false,
+                    show_reset_button: false,
+              },
+              defaultDate: [],
+              
     };
   },
   components: {
@@ -181,72 +235,56 @@ export default {
     /***
      * Returns a page from the searched data or the whole data.
      *  Search is performed in the watch section below
-     */   
+     */  
+    
+  // eslint-disable-next-line vue/return-in-computed-property
   queriedData() {
-      let result = this.stores;
-     
-        if (this.selectFleet === '')
-        {
-          return result;
-        }else{ 
-          const hl = this.stores.filter((element)=>{
-         return element.Fleet.match(this.selectFleet);
-
-        });
-         
-         if(this.selectShips === '')
-        {
-          return hl
-        } else {
-
-             const sh = this.stores.filter((element)=>{
-                return element.Ship.match(this.selectShips)
-           });
-
-        if(this.value === '')
-        {   
-             return sh
-        }else {
-            
-                var startdate = this.start_date;
-                var enddate = this.end_date; 
-                 const dt =  this.stores.filter((element)=>{
-                var date = element.Date_sp
-                
-                 return (date >= startdate && enddate >= date); 
-
-              })
-
-              if(dt)
-              {
-                return sh
-              }
-          
-              return false; 
-
-              }
-              
-        }
-          
-
-      }
-      
-    }
  
    
-  },
+     },
+  // eslint-disable-next-line vue/return-in-computed-property
+ 
 
+  },
   methods: {
    
-    
+   forceRerender(){
+      // this.componentKey =+ 1;
+      window.location.reload()
+     
+   },  
+      searchMethod() {
+          this.fetchData();
+          // this.defaultDates();
+      
+    },
     onChangeQuery(queryParams) {
                 this.queryParams = queryParams;
-                this.fetchData();
-                // this.fetchFleetbyDate();
-              
-                  
+                   this.fetchData();
+                  // this.queriedData();
             },
-      
+
+        defaultDates(){
+               
+             
+            //  const formatDate = self.rows;
+            //     const fd = formatDate.forEach((item)=>{
+            //           // const d = moment(item.Date).format('MM/DD/YYYY hh:mm');
+            //           self.rows.push(
+            //             {Date: moment(item.Date).format('MM/DD/YYYY hh:mm')});
+            //             console.log(self.rows)
+            //           // item.filter((element)=>{
+            //           //   self.rows.Date = moment(element.Date).format('MM/DD/YYYY hh:mm');
+            //           //   console.log(self.rows.Date);
+            //           //   return self.rows.Date
+            //           // })
+            //           // console.log(fd)
+
+            //     })
+          
+   
+        },
+  
       fetchShip(){
         let self = this;
                 const config = {
@@ -255,28 +293,40 @@ export default {
            axios.get('http://localhost:3000/api/shipdata', config, )
             .then(function(res) {
               self.shipData = res.data.docs
-               // eslint-disable-next-line no-console
-               console.log(self.shipData)
-              
+                
        }) .catch(function(error) {
                        // eslint-disable-next-line no-console
                        console.log(error);
-                    });; 
+                    });
         },
+      
      fetchFleetbyDate(){
         let self = this;
-                const config = {
-      headers: {'Access-Control-Allow-Origin': '*'}
-          };
-
-    //  const starts = '2020-02-15T17:00:00.000Z'
-    // const ends = '2020-02-17T17:00:00.000Z'
-    // console.log(this.start_date)
-    axios.get(`http://localhost:3000/api/solarbydate/${this.selectFleet}/${this.start_date.toISOString()}/${this.end_date.toISOString()}`, config, )
-            .then(function(res) {
+    
+ 
+         axios.get(`http://localhost:3000/api/solar`, {
+                        params: {
+                            "queryParams": this.queryParams,
+                            "totalDocs": this.queryParams.totalDocs,
+                            "page": this.queryParams.page,
+                            "pagingCounter": this.queryParams.pagingCounter,
+                            "limit": this.queryParams.limit,
+                            "hasPrevPage": this.queryParams.hasPrevPage,
+                            "hasNamePage": this.queryParams.hasNextPage,
+                            "prevPage": this.queryParams.prevPage,
+                            "nextPage": this.queryParams.nextPage,
+                  
+                            
+                        }
+                        
+                    } )
+            .then(function(response) {
                
-             // eslint-disable-next-line no-console
-             console.log(res.data)
+             
+                        self.stores = response.data
+                      //  console.log(self.stores);
+
+          
               
        }) .catch(function(error) {
                         // eslint-disable-next-line no-console
@@ -284,14 +334,17 @@ export default {
                     });; 
       },
     fetchFleet(){
+
+      
         let self = this;
                 const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
           };
            axios.get('http://localhost:3000/api/fleetdata', config, )
+
             .then(function(res) {
               self.FleetData = res.data.docs
-               
+             
               
        }) .catch(function(error) {
                         // eslint-disable-next-line no-console
@@ -299,59 +352,60 @@ export default {
                     });
       },
     fetchData() {
-                let self = this;
-
-      
-        axios.get(`http://localhost:3000/api/solar/${this.selectFleet}`,  {
+        let self = this;
+         
+        axios.get(`http://localhost:3000/api/solar/${this.selectFleet}/${this.selectShips}/${this.start_date.toISOString()}/${this.end_date.toISOString()}`,  {
                         params: {
                             "queryParams": this.queryParams,
+                            "totalDocs": this.queryParams.totalDocs,
                             "page": this.queryParams.page,
-                            
+                            "pagingCounter": this.queryParams.pagingCounter,
+                            "limit": this.queryParams.limit,
+                            "hasPrevPage": this.queryParams.hasPrevPage,
+                            "hasNamePage": this.queryParams.hasNextPage,
+                            "prevPage": this.queryParams.prevPage,
+                            "nextPage": this.queryParams.nextPage,
+      
                         }
                         
                     })
                     .then(function(response) {
-                        self.stores = response.data.data
-
-                        self.pageData = response.data
-                        self.page = self.pageData.page
-                        self.total_rows = self.pageData.pageCount;
-                        self.limit = self.pageData.limit;
-                           
-                        self.rows = response.data.data;
                        
-                     // eslint-disable-next-line no-console
-                     console.log(self.rows)
-                      
-                    }) 
+
+         self.page = response.data.page
+         self.totalDocs = response.data.totalDocs;
+         self.pagingCounter = response.data.pagingCounter;
+         self.hasPrevPage = response.data.hasPrevPage;
+         self.hasNextPage = response.data.hasNextPage;
+         self.prevPage = response.data.prevPage;
+         self.nextPage = response.data.nextPage;
+          self.total_rows = response.data.totalDocs;
+                     
+            self.rows = response.data.docs
+       
+
+
+                
+                    
+                         const myJsonObj =  self.rows.forEach((item)=>{
+                            
+                            self.rows_data.push(item)
+                         });
+                   
+         
+                 }) 
                     .catch(function(error) {
                         // eslint-disable-next-line no-console
                         console.log(error);
-                    });
+                         
+           });
                     
-                 
                     
-        },
-    dateInterval(){
-             var startdate = this.value;
-              var enddate = this.value1;
-              const dt =  this.stores.filter((element)=>{
-                var date = element.Date_sp
-              
-                 return (date >= startdate && enddate >= date); 
-              });
-
-              if(dt)
-              {
-                return dt
-              }
-          
-              return false; 
         },
     byFleet(){
       let fl = this.FleetData 
+     
       const t = []
-  
       const Fleet = fl.forEach((name,index)=>{
          t.push(name.Fleet);
            return name.Fleet;
@@ -359,8 +413,10 @@ export default {
       return [...new Set(t)];
       
     },
+
 byShip(){
       let sl = this.shipData
+  
       const t = []
       const u = []
        const sh = sl.forEach((name,index)=>{
@@ -381,6 +437,7 @@ byShip(){
                u.push(name.Vessel);
          
                  return name.Vessel;
+                
                 });
               return [...new Set(u)];
           }
@@ -388,11 +445,15 @@ byShip(){
     },
    
   },
+  beforeMount(){
+      // this.defaultDates();
+  },
   mounted() {
    
-        // this.fetchData();
+       
         this.fetchFleet();
         this.fetchShip();
+   
 
   },
   watch: {
@@ -401,9 +462,9 @@ byShip(){
      * NOTE: If you have a lot of data, it's recommended to do the search on the Server Side and only display the results here.
      * @param value of the query
      */
-     
-    
+   
   }
+  
 
 }
 </script>

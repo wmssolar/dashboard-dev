@@ -10,8 +10,8 @@ import VectorMapsHeader from 'src/pages/Dashboard/Maps/VectorMapsHeader';
 const Calendar = () =>
   import(/* webpackChunkName: "calendar" */ 'src/pages/Dashboard/Calendar/CalendarRoute.vue');
 // Charts
-// const Charts = () =>
-//   import(/* webpackChunkName: "charts" */ 'src/pages/Dashboard/Charts.vue');
+const Charts = () =>
+  import(/* webpackChunkName: "charts" */ 'src/pages/Dashboard/Charts.vue');
 const Kpis = () =>
   import(/* webpackChunkName: "charts" */ 'src/pages/Dashboard/Kpis.vue');
 // Components pages
@@ -50,6 +50,8 @@ const VectorMaps = () =>
 // TableList pages
 const RegularTables = () =>
   import(/* webpackChunkName: "tables" */ 'src/pages/Dashboard/Tables/RegularTables.vue');
+  const ExcelEditor = () =>
+  import(/* webpackChunkName: "Excel" */ 'src/pages/Dashboard/Tables/ExcelEditor.vue');
 
 const Assorted = () =>
   import(/* webpackChunkName: "pareto" */ 'src/pages/Dashboard/Charts/Assorted.vue');
@@ -114,6 +116,24 @@ let chartMenu = {
   ]
 };
 
+
+
+let excelMenu = {
+  path: '/tables',
+  component: DashboardLayout,
+  redirect: '/tables/exceleditor',
+  name: 'Excel',
+  children: [
+    {
+      path: 'exceleditor',
+      name: 'Excel Editor',
+      components: { default: ExcelEditor, header: DefaultHeader }
+    },
+ 
+  ]
+};
+
+
 let tablesMenu = {
   path: '/table-list',
   component: DashboardLayout,
@@ -124,6 +144,7 @@ let tablesMenu = {
       path: 'regular',
       name: 'Regular Tables',
       components: { default: RegularTables, header: DefaultHeader }
+     
     },
  
   ]
@@ -167,7 +188,7 @@ const routes = [
   },
   componentsMenu,
   tablesMenu,
-  mapsMenu,
+  excelMenu,
   chartMenu,
  
   {
@@ -186,11 +207,11 @@ const routes = [
         name: 'Calendar',
         components: { default: Calendar, header: CalendarHeader }
       },
-      // {
-      //   path: 'charts',
-      //   name: 'Charts',
-      //   components: { default: Charts, header: DefaultHeader }
-      // },
+      {
+        path: 'charts',
+        name: 'Charts',
+        components: { default: Charts, header: DefaultHeader }
+      },
       {
         path: 'kpis',
         name: 'Kpis',

@@ -17,6 +17,7 @@ module.exports = {
         'chart.js': 'chart.js/dist/Chart.js'
       }
     },
+    
     plugins: [
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 6

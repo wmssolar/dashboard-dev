@@ -35,11 +35,31 @@ const data = {
     }
   },
   title: {
-    text: "Bubble"
+    text: "Total Calls versus Revenue"
   },
-
-
+xAxis: {
+  gridLineWidth: 1,
+    title: {
+        text: "Number of Calls"
+    },
+    labels: {
+      format: "{value} calls"
+    },
+     zIndex: 3
+},
+yAxis: {
+     startOnTick: false,
+    endOnTick: false,
+    title: {
+      text: "Total Revenue"
+    },
+    labels: {
+      format: "{value} Dollars"
+    },
+    zIndex: 3
+},
   plotOptions: {
+      
       series: {
         maxSize: 40
       }
@@ -47,32 +67,25 @@ const data = {
   
     series: [{
       data: [
-        { x: 95, y: 95, z: 834 },
-        { x: 86.5, y: 102.9, z: 1000 },
-        { x: 80.8, y: 91.5, z: 242 },
-        { x: 80.4, y: 102.5, z: 121 }
+        { x: 228, y: 22.8, z: 834 },
+        { x: 1, y: 0.65, z: 100 },
+        { x: 5, y: 0.5, z: 242 },
+        { x: 451, y: 45.1, z: 721 },
+        { x: 350, y: 227.5, z: 242 },
+        { x: 849, y: 84.9, z: 1200 },
       ]
-    }, {
+    },  {
       data: [
-        { x: 80.3, y: 86.1, z: 358 },
-        { x: 78.4, y: 70.1, z: 450 },
-        { x: 74.2, y: 68.5, z: 598 }
+        { x: 3, y: 93.8, z: 834 },
+        { x: 3, y: 21.98, z: 300 },
+        { x: 10, y: 1, z: 200 },
+        { x: 1, y: 0, z: 15 },
+        { x: 38, y: 3.8, z: 102 },
+        { x: 1, y: 84.9, z: 20 },
       ]
-    }, {
-      data: [
-        { x: 73.5, y: 83.1, z: 678 },
-        { x: 71, y: 93.2, z: 314 },
-        { x: 69.2, y: 57.6, z: 415 },
-        { x: 68.6, y: 20, z: 799 }
-      ]
-    }, {
-      data: [
-        { x: 65.5, y: 126.4, z: 35.3 },
-        { x: 65.4, y: 50.8, z: 28.5 },
-        { x: 63.4, y: 51.8, z: 15.4 },
-        { x: 64, y: 82.9, z: 31.3 }
-      ]
-    }]
+    }
+   
+   ]
   
   };
 export default {
@@ -85,5 +98,31 @@ export default {
       Highcharts,
     };
   }
+  //  mounted() {
+     
+  //   const api_url = 'http://localhost:3000/api/qos';    
+  //     // let self = this
+  //   // eslint-disable-next-line no-console
+  //               // console.log(this.options.series[1].data) 
+  //               // eslint-disable-next-line no-console
+  //               // console.log(this.options.series[0].data)    
+    
+  //     const config = { headers: {'Access-Control-Allow-Origin': '*'} };
+  //  axios.get(api_url, config).then(response => {
+             
+  //              this.options.series[1].data = [response.data.docs[0].Latency,
+  //                                           response.data.docs[0].PacketLoss, 
+  //                                           response.data.docs[0].MOS,
+  //                                           response.data.docs[0].Jitter]
+  //              // eslint-disable-next-line no-console
+  //               console.log(this.options.series[1].data)
+              
+  //             }).
+  //             // eslint-disable-next-line no-console
+  //             catch((error) => console.log(error));
+     
+
+  // },
+ 
 };
 </script>
