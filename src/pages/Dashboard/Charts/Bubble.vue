@@ -14,23 +14,26 @@ const data = {
     type: "bubble",
     plotBorderWidth: 1,
     zoomType: "xy",
-    spacingBottom: 15,
-     spacingTop: 10,
-     spacingLeft: 10,
-     spacingRight: 10,
+    spacingBottom: 10,
+     spacingTop: 5,
+     spacingLeft: 5,
+     spacingRight: 5,
   },
 
   legend: {
     enabled: true,
-      align: 'left',
+      align: 'right',
       layout: 'vertical',
       verticalAlign: 'top',
-      itemMarginTop: 10,
+      itemMarginTop: 5,
       bubbleLegend: {
         enabled: true,
         borderWidth: 1,
         connectorDistance: 60,
-        maxSize: 70,
+        maxSize: 90,
+        labels: {
+          align: left
+        },
         ranges: [{}, {}, { color: '#e4d354' }]
     }
   },
@@ -61,11 +64,13 @@ yAxis: {
   plotOptions: {
       
       series: {
-        maxSize: 40
+        maxSize: 80
       }
     },
   
     series: [{
+      name1: 'Carriers', 
+      
       data: [
         { x: 228, y: 22.8, z: 834 },
         { x: 1, y: 0.65, z: 100 },
@@ -75,6 +80,7 @@ yAxis: {
         { x: 849, y: 84.9, z: 1200 },
       ]
     },  {
+      
       data: [
         { x: 3, y: 93.8, z: 834 },
         { x: 3, y: 21.98, z: 300 },
@@ -97,32 +103,14 @@ export default {
       options: data,
       Highcharts,
     };
-  }
-  //  mounted() {
-     
-  //   const api_url = 'http://localhost:3000/api/qos';    
-  //     // let self = this
-  //   // eslint-disable-next-line no-console
-  //               // console.log(this.options.series[1].data) 
-  //               // eslint-disable-next-line no-console
-  //               // console.log(this.options.series[0].data)    
-    
-  //     const config = { headers: {'Access-Control-Allow-Origin': '*'} };
-  //  axios.get(api_url, config).then(response => {
-             
-  //              this.options.series[1].data = [response.data.docs[0].Latency,
-  //                                           response.data.docs[0].PacketLoss, 
-  //                                           response.data.docs[0].MOS,
-  //                                           response.data.docs[0].Jitter]
-  //              // eslint-disable-next-line no-console
-  //               console.log(this.options.series[1].data)
-              
-  //             }).
-  //             // eslint-disable-next-line no-console
-  //             catch((error) => console.log(error));
-     
+  },
+  methods: {
+    getdt() {
 
-  // },
+      // console.log(this.options.series)
+    }
+  }
+
  
 };
 </script>

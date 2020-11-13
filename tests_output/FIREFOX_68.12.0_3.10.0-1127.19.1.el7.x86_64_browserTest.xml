@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites errors="0"
-            failures="1"
+<testsuites errors="1"
+            failures="0"
             tests="1">
 
   <testsuite name="browserTest"
-    errors="0" failures="1" hostname="" id="" package="browserTest" skipped="0"
-    tests="1" time="5.999" timestamp="">
+    errors="1" failures="0" hostname="" id="" package="browserTest" skipped="0"
+    tests="1" time="0.9110" timestamp="">
   
-    <testcase name="Demo test dashboard" classname="browserTest" time="5.999" assertions="3">
-
-    
-
-      <failure message="Timed out while waiting for element &lt;.now-ui-icons design_bullet-list-67&gt; to be present for 5000 milliseconds. - expected &#34;visible&#34; but got: &#34;not found&#34; (5053ms)">    at Object.Demo test dashboard (/home/cdh/dashboard-dev-testing/tests/browserTest.js:7:10)
-    at processTicksAndRejections (internal/process/task_queues.js:97:5)</failure>
-
+    <testcase name="Demo test dashboard" classname="browserTest" time="0.9110" assertions="0">
+    <error message="Error while running &#34;elementIdAttribute&#34; command: First argument passed to .elementIdAttribute() should be a web element ID string. Received undefined." type="error"><![CDATA[
+    Error: Error while running &#34;elementIdAttribute&#34; command: First argument passed to .elementIdAttribute() should be a web element ID string. Received undefined.
+    at Function.validateElementId (/home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/api/protocol/_base-action.js:20:19)
+    at CommandInstance.command (/home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/api/protocol/elementIdAttribute.js:15:20)
+    at /home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/api/_loaders/command.js:158:29
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    ]]></error>
     
     </testcase>
   
 
+  
+    <system-err>
+        Error: Error while running &#34;elementIdAttribute&#34; command: First argument passed to .elementIdAttribute() should be a web element ID string. Received undefined.
+   See https://nightwatchjs.org/api/elementIdAttribute.html
+  
+       at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    </system-err>
   
 
     

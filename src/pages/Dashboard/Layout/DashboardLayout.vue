@@ -8,7 +8,7 @@
         </sidebar-item>
      
    <sidebar-item :link="{name: 'Tables', icon: 'now-ui-icons design_bullet-list-67'}">
-          <sidebar-item :link="{name: 'Regular Tables', path: '/table-list/regular'}">
+          <sidebar-item :link="{name: 'RegularTables', path: '/table-list/regular'}">
           </sidebar-item>
          </sidebar-item>
 

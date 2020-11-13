@@ -13,7 +13,6 @@
     </div>
 
 
-
   <h4 slot="header" class="card-title"></h4>
     <div class="col-12 d-flex justify-content-center justify-content-sm-between" >
     </div>
@@ -22,7 +21,7 @@
           <el-select class="select-danger" 
             placeholder="Select Fleet" 
             v-model="selectFleet"
-            clearable="true"
+         
         
             >
               <el-option dark 
@@ -36,7 +35,7 @@
         <el-select class="select-danger" 
         placeholder="Select Ship" 
         v-model="selectShips"
-        clearable="true"
+     
      
         >
           <el-option dark v-for="(item, index) in byShip()" :key="index"
@@ -54,11 +53,11 @@
                 <fg-input>
                   <el-date-picker
                         v-model="start_date"
-                        clearable="true"
+                      
                         type="date"
                         placeholder="Pick a Date"
                         format="yyyy/MM/dd"
-                        default-value=""
+                       
                        >
                     </el-date-picker>
                     
@@ -68,9 +67,9 @@
       <fg-input>
          <el-date-picker
               v-model="end_date"
-              clearable="true"
+          
               type="date"
-              placeholder="Pick a Date"
+              placeholder="Pick another Date"
               format="yyyy/MM/dd"
               >
      </el-date-picker>
@@ -78,22 +77,21 @@
       </fg-input>
       <br>
 
-       
-
-   
      <div class="col-12 d-flex justify-content-center justify-content-sm-between">
-        <el-button type="primary" round icon="el-icon-search" 
-      v-on:click="searchMethod()">Search</el-button>
-     
+       
+       <b-button title="Reload"
+        v-on:click="searchMethod()">
+          <b-icon icon="search" aria-hidden="true"></b-icon>
+        </b-button>
+       
  
   <el-divider direction="vertical"></el-divider>
-      <el-button type="dark" round icon="el-icon-refresh" 
+      <el-button type="dark" icon="el-icon-refresh" 
       v-on:click="forceRerender()">Reload</el-button>
        </div>
        
      </div>
      
-   
    
       <vue-bootstrap4-table 
          :rows="rows" 
@@ -112,13 +110,16 @@
 </template>
 <script>
 
-import { Table, TableColumn, DatePicker, Select, Option  } from 'element-ui';
-
+import { Table, TableColumn, DatePicker, Select, Option, Icon  } from 'element-ui';
+ 
 import axios from 'axios'
  
 import VueBootstrap4Table from 'vue-bootstrap4-table'
 import moment from 'moment';
 import { select } from 'd3';
+var path = require('path')
+var rfs = require('rotating-file-stream')
+
 
 export default {
      
@@ -227,7 +228,8 @@ export default {
     [DatePicker.name]: DatePicker,
     [Select.name]: Select,
     [Option.name]: Option,
-    VueBootstrap4Table
+    VueBootstrap4Table,
+     
    
      
   },
@@ -247,7 +249,9 @@ export default {
 
   },
   methods: {
-   
+ 
+
+    
    forceRerender(){
       // this.componentKey =+ 1;
       window.location.reload()
@@ -255,35 +259,24 @@ export default {
    },  
       searchMethod() {
           this.fetchData();
-          // this.defaultDates();
-      
+        //   var fs = require('file-system')
+        // var s =  fs.writeFile('log/access.log', function(err) {})
+//  var accessLogStream = rfs.createStream('access.log', {
+//   interval: '1d', // rotate daily
+//   path: path.join(__dirname, 'log')
+//     })
+
+          // this.$log.info('test', {s})
+          // this.$log.success('Transaction saved!');     
+         
+                  
     },
     onChangeQuery(queryParams) {
                 this.queryParams = queryParams;
                    this.fetchData();
                   // this.queriedData();
             },
-
-        defaultDates(){
-               
-             
-            //  const formatDate = self.rows;
-            //     const fd = formatDate.forEach((item)=>{
-            //           // const d = moment(item.Date).format('MM/DD/YYYY hh:mm');
-            //           self.rows.push(
-            //             {Date: moment(item.Date).format('MM/DD/YYYY hh:mm')});
-            //             console.log(self.rows)
-            //           // item.filter((element)=>{
-            //           //   self.rows.Date = moment(element.Date).format('MM/DD/YYYY hh:mm');
-            //           //   console.log(self.rows.Date);
-            //           //   return self.rows.Date
-            //           // })
-            //           // console.log(fd)
-
-            //     })
-          
-   
-        },
+  
   
       fetchShip(){
         let self = this;
@@ -353,8 +346,8 @@ export default {
       },
     fetchData() {
         let self = this;
-         
-        axios.get(`http://localhost:3000/api/solar/${this.selectFleet}/${this.selectShips}/${this.start_date.toISOString()}/${this.end_date.toISOString()}`,  {
+        
+        axios.get(`http://localhost:3000/api/solar/${this.selectFleet}/${this.selectShips}/${moment(this.start_date).format()}/${moment(this.end_date).format()}`,  {
                         params: {
                             "queryParams": this.queryParams,
                             "totalDocs": this.queryParams.totalDocs,
@@ -379,25 +372,24 @@ export default {
          self.hasNextPage = response.data.hasNextPage;
          self.prevPage = response.data.prevPage;
          self.nextPage = response.data.nextPage;
-          self.total_rows = response.data.totalDocs;
+        self.total_rows = response.data.totalDocs;
                      
-            self.rows = response.data.docs
+         self.rows = response.data.docs
        
 
-
-                
-                    
-                         const myJsonObj =  self.rows.forEach((item)=>{
+        const myJsonObj =  self.rows.forEach((item)=>{
                             
                             self.rows_data.push(item)
                          });
-                   
+                
+ 
          
                  }) 
                     .catch(function(error) {
-                        // eslint-disable-next-line no-console
-                        console.log(error);
-                         
+                       // eslint-disable-next-line no-console
+                        console.log(error.config);
+                        // console.log(error.response.headers);
+                    
            });
                     
                     
@@ -411,6 +403,7 @@ export default {
            return name.Fleet;
           });   
       return [...new Set(t)];
+        
       
     },
 
@@ -443,10 +436,13 @@ byShip(){
           }
            
     },
+  
    
   },
-  beforeMount(){
-      // this.defaultDates();
+  created(){
+     
+       
+  
   },
   mounted() {
    

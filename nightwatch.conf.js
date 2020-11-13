@@ -13,20 +13,32 @@ module.exports = {
         ],
         port: 4444
       },
-      desiredCapabilities: {
-        browserName: 'firefox',
-        javascriptEnabled: true,
-        acceptSslCerts: true,
-        chromeOptions: {
-          "args": [
-            "headless",
-            "no-sandbox",
-            "disable-gpu",
-            "--no-sandbox"
-          ]
+      firefox: {
+        webdriver: {
+          server_path: geckodriver.path
+        },
+        desiredCapabilities: {
+          browserName: 'firefox',
+          marionette: true,
+          javascriptEnabled: true,
+          acceptSslCerts: true,
+  
         }
       }
-    },
+      // desiredCapabilities: {
+      //   browserName: 'firefox',
+      //   javascriptEnabled: true,
+      //   acceptSslCerts: true,
+        // chromeOptions: {
+        //   "args": [
+        //     "headless",
+        //     "no-sandbox",
+        //     "disable-gpu",
+        //     "--no-sandbox"
+        //   ]
+        // }
+      // }
+    // },
     // chrome: {
     //   webdriver: {
     //     server_path: chromedriver.path
@@ -40,14 +52,17 @@ module.exports = {
     //     }
     //   }
     // },
-    firefox: {
-      webdriver: {
-        server_path: geckodriver.path
-      },
-      desiredCapabilities: {
-        browserName: 'firefox',
-        marionette: true
-      }
-    }
-   }
+    // firefox: {
+    //   webdriver: {
+    //     server_path: geckodriver.path
+    //   },
+    //   desiredCapabilities: {
+    //     browserName: 'firefox',
+    //     marionette: true,
+    //     javascriptEnabled: true,
+    //     acceptSslCerts: true,
+
+    //   }
+     }
+  }
 };

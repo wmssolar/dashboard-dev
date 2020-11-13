@@ -126,7 +126,7 @@ let tablesMenu = {
   children: [
     {
       path: 'regular',
-      name: 'Regular Tables',
+      name: 'RegularTables',
       components: { default: RegularTables, header: DefaultHeader }
      
     },

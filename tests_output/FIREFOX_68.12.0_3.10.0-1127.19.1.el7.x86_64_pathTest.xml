@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="0"
+            tests="1">
+
+  <testsuite name="pathTest"
+    errors="1" failures="0" hostname="" id="" package="pathTest" skipped="2"
+    tests="1" time="0.001000" timestamp="">
+  
+    <testcase name="Test Case-1: Go to Dashboard, check elements and take screenshots" classname="pathTest" time="0.001000" assertions="0">
+    <error message="client.page.pathTest is not a function" type="error"><![CDATA[
+    TypeError: client.page.pathTest is not a function
+    at Object.Test Case-1: Go to Dashboard, check elements and take screenshots (/home/cdh/dashboard-dev-testing/Tests/pathTest.js:5:30)
+    at Context.call (/home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/testsuite/context.js:379:35)
+    at TestCase.run (/home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/testsuite/testcase.js:53:31)
+    at Runnable.__runFn (/home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/testsuite/index.js:376:80)
+    at Runnable.run (/home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/testsuite/runnable.js:123:21)
+    at TestSuite.createRunnable (/home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/testsuite/index.js:443:33)
+    at TestSuite.handleRunnable (/home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/testsuite/index.js:448:18)
+    at /home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/testsuite/index.js:376:21
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at async DefaultRunner.runTestSuite (/home/cdh/dashboard-dev-testing/node_modules/nightwatch/lib/runner/test-runners/default.js:68:7)
+    ]]></error>
+    
+    </testcase>
+  
+
+  
+    <system-err>
+        TypeError: client.page.pathTest is not a function
+   - verify if page objects are setup correctly, check &#34;page_objects_path&#34; in your config
+       at Object.Test Case-1: Go to Dashboard, check elements and take screenshots (/home/cdh/dashboard-dev-testing/Tests/pathTest.js:5:30)
+       at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    </system-err>
+  
+
+    
+
+  
+    
+    <testcase
+      name="Test Case-2: Check paths for dashboard" classname="pathTest">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Test Case-3: Go to paths for dashboard and check body" classname="pathTest">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>
