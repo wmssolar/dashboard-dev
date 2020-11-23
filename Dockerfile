@@ -18,8 +18,8 @@ EXPOSE 80
 CMD [ "npm", "run", "build" ]
 
 
-# #production stage
-FROM wmsolar/nginxv1:latest
+#production stage
+FROM wmsolar/nginx:latest
 COPY --from=builder /usr/src/app/dist/ /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY hosts /etc/hosts
