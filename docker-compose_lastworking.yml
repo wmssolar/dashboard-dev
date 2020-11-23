@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+
+  #Proxies requests to internal services
+  reverse-proxy:
+    image: wmsolar/nginxv1:latest
+    container_name: reverse_proxy
+    depends_on: 
+       - solardashboard
+    networks:
+       - overlay
+    volumes:
+      - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+
+  solardashboard:
+    build: .
+    image: wmsolar/dashboard:latest
+    container_name: solardashboard
+    networks:
+      - overlay
+    privileged: true
+    ports:
+      - "8080:8080"
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+
+networks:
+   overlay:
