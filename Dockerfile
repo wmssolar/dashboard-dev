@@ -22,6 +22,7 @@ CMD [ "npm", "run", "build" ]
 FROM wmsolar/nginxv1:latest
 COPY --from=builder /usr/src/app/dist/ /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY hosts /etc/hosts
 EXPOSE 8080:80
 CMD ["nginx", "-g", "daemon off;"]
 

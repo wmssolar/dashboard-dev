@@ -84,7 +84,6 @@
           <b-icon icon="search" aria-hidden="true"></b-icon>
         </b-button>
        
- 
   <el-divider direction="vertical"></el-divider>
    <b-button title="Reload"
         v-on:click="forceRerender()">
