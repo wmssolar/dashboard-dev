@@ -52,7 +52,7 @@
             </el-select>
           <el-divider direction="vertical" height="400px"></el-divider>
      
-       <b-button title="Reload"
+       <b-button title="Search"
         v-on:click="searchMethod()">
           <b-icon icon="search" aria-hidden="true"></b-icon>
         </b-button>
@@ -198,6 +198,7 @@ export default {
   mounted() {
           this.fetchFleet();
         this.fetchShip();
+        this.getParetoData(); 
     
   },
   watch: {
@@ -325,15 +326,16 @@ export default {
 
              axios.get(self.api_url, config)
            .then(response => { 
-           
-           this.paretoData = [ response.data.docs[0].Latency,
+            // eslint-disable-next-line 
+           console.log(response.data.docs)
+           self.paretoData = [ response.data.docs[0].Latency,
                                               response.data.docs[0].PacketLoss, 
                                               response.data.docs[0].Mos,
                                               response.data.docs[0].Jitter 
                                             ]
                                                                                 
                          
-                          this.options.series[1].data = this.paretoData
+                          self.options.series[1].data = self.paretoData
                         
                         })
               
@@ -347,4 +349,3 @@ export default {
  
 }
 </script>
-

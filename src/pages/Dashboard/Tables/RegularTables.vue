@@ -79,15 +79,18 @@
 
      <div class="col-12 d-flex justify-content-center justify-content-sm-between">
        
-       <b-button title="Reload"
+       <b-button title="Search"
         v-on:click="searchMethod()">
           <b-icon icon="search" aria-hidden="true"></b-icon>
         </b-button>
        
  
   <el-divider direction="vertical"></el-divider>
-      <el-button type="dark" icon="el-icon-refresh" 
-      v-on:click="forceRerender()">Reload</el-button>
+   <b-button title="Reload"
+        v-on:click="forceRerender()">
+          <b-icon icon="bootstrap-reboot" aria-hidden="true"></b-icon>
+        </b-button>
+
        </div>
        
      </div>
@@ -159,28 +162,27 @@ export default {
                         
                     },
                      {
-                        label: "InAvg15min",
-                        name: "InAvg15min",
-                        
-                    },
-                     {
                         label: "InMinBps",
                         name: "InMinBps",
+                        
+                    }, {
+                        label: "InAvg15min",
+                        name: "InAverage15min",
                         
                     },
                      {
                         label: "InMaxBps",
                         name: "InMaxBps",
                         
-                    },
-                     {
-                        label: "OutAvg15min",
-                        name: "OutAvg15min",
-                        
-                    },
+                    },  
                      {
                         label: "OutMinBps",
                         name: "OutMinBps",
+                        
+                    },
+                    {
+                        label: "OutAvg15min",
+                        name: "OutAverage15min",
                         
                     },
                      {

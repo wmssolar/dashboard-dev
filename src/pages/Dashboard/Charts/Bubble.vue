@@ -31,9 +31,7 @@ const data = {
         borderWidth: 1,
         connectorDistance: 60,
         maxSize: 90,
-        labels: {
-          align: left
-        },
+     
         ranges: [{}, {}, { color: '#e4d354' }]
     }
   },
