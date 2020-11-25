@@ -41,7 +41,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
  
 import App from './App.vue';
-Vue.config.devtools = true
+// Vue.config.devtools = true
 
 
 // router setup

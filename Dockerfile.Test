@@ -6,6 +6,8 @@ WORKDIR  /usr/src/dashbd
 # Install app dependencies
 COPY package*.json ./
 
+RUN mkdir -p /var/www/solardashboard.com/html
+
 RUN npm install && \
     npm rebuild node-sass && \
     yum clean all && \
@@ -13,7 +15,7 @@ RUN npm install && \
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 8080
 
 CMD [ "npm", "run", "ci" ]
 

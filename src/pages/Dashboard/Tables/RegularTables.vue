@@ -288,9 +288,9 @@ export default {
             .then(function(res) {
               self.shipData = res.data.docs
                 
-       }) .catch(function(error) {
+       }) .catch(function() {
                        // eslint-disable-next-line no-console
-                       console.log(error);
+                        console.error();
                     });
         },
       
@@ -322,9 +322,9 @@ export default {
 
           
               
-       }) .catch(function(error) {
+       }) .catch(function() {
                         // eslint-disable-next-line no-console
-                        console.log(error);
+                       console.error();
                     });; 
       },
     fetchFleet(){
@@ -340,9 +340,9 @@ export default {
               self.FleetData = res.data.docs
              
               
-       }) .catch(function(error) {
+       }) .catch(function() {
                         // eslint-disable-next-line no-console
-                        console.log(error);
+                        console.error();
                     });
       },
     fetchData() {
@@ -386,9 +386,9 @@ export default {
  
          
                  }) 
-                    .catch(function(error) {
+                    .catch(function( ) {
                        // eslint-disable-next-line no-console
-                        console.log(error.config);
+                         console.error();
                         // console.log(error.response.headers);
                     
            });
