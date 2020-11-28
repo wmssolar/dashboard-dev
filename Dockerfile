@@ -1,4 +1,9 @@
-FROM wmsolar/dashboard:latest as dev-stage
+# FROM wmsolar/dashboard:latest
+#as dev-stage
+FROM wmsolar/dashboard-prod:1.2
+
+# #  Create app directory
+# RUN mkdir  /usr/src/app
 
 #  Create app directory
 WORKDIR  /usr/src/app
@@ -6,7 +11,7 @@ WORKDIR  /usr/src/app
 # Install app dependencies
 COPY package*.json ./
 
-RUN mkdir -p /var/www/solardashboard.com/html
+# RUN mkdir -p /var/www/solardashboard.com/html
 
 RUN npm install && \
     npm rebuild node-sass && \
@@ -15,18 +20,10 @@ RUN npm install && \
 
 COPY . .
 
-FROM dev-stage as builder
-RUN npm run build
-# EXPOSE 80
-CMD [ "npm", "run", "build" ]
+EXPOSE 8080
 
 
-#production stage
-FROM wmsolar/dshbrdprod:latest
-COPY --from=builder /usr/src/app/dist/ /var/www/solardashboard.com/html/
-# COPY --from=builder /usr/src/app/reverse_proxy/conf.d/default.conf /etc/nginx/conf.d/
-COPY --from=builder /usr/src/app/reverse_proxy/sites-available/solardashboard.com /etc/nginx/sites-available/
-# COPY --from=builder /usr/src/app/nginx.conf /etc/nginx/
-EXPOSE 8080:80
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "npm", "run", "start-server" ]
 
+
+ 

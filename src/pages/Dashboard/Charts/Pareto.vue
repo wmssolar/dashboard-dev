@@ -106,6 +106,7 @@ export default {
       selectShips: null,
       containerChart: {},
        shipData:[],
+       hostname: '',
        FleetData: [],
        start_date: '',
         queryParams: {
@@ -120,7 +121,7 @@ export default {
               prevPage: null,
               nextPage: 2 
                 },
-       api_url: 'http://localhost:3000/api/qos',
+     
       options: Highcharts.merge(this.options, {
         chart: {
           renderTo: "container",
@@ -193,7 +194,9 @@ export default {
     }
   },
   created() {
-     this.getParetoData();                                                     
+    this.gethostname();  
+     this.getParetoData();   
+                                                     
   },
   mounted() {
           this.fetchFleet();
@@ -215,13 +218,20 @@ export default {
   },
   methods: {
      
+      gethostname(){
+        var ip = location.hostname;
+       this.hostname = ip;
+  
+       console.log(this.hostname)
+
+    },
    forceRerender(){
       // this.componentKey =+ 1;
       window.location.reload()
      
    },
       searchMethod() {
-        const api_urls = `http://localhost:3000/api/qos/${this.selectFleet}/${this.selectShips}/${moment(this.start_date).format()}` 
+        const api_urls = `http://${this.hostname}:3001/api/qos/${this.selectFleet}/${this.selectShips}/${moment(this.start_date).format()}` 
           this.api_url = api_urls
            this.getParetoData();
        
@@ -229,10 +239,7 @@ export default {
               this.containerChart = this.Highcharts.chart('container', this.options);
 
               this.containerChart.series[1].setData(this.paretoData, true);
-               
-              //  console.log(this.containerChart)
-              //  console.log(this.containerChart.series[1]) 
-             
+           
     
             
     },
@@ -249,7 +256,7 @@ export default {
                 const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
           };
-           axios.get('http://localhost:3000/api/fleetdata', config, )
+           axios.get(`http://${this.hostname}:3001/api/fleetdata`, config, )
             .then(function(res) {
               self.FleetData = res.data.docs
                
@@ -264,7 +271,7 @@ export default {
                 const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
           };
-           axios.get('http://localhost:3000/api/shipdata', config, )
+           axios.get(`http://${this.hostname}:3001/api/shipdata`, config, )
             .then(function(res) {
               self.shipData = res.data.docs
                // eslint-disable-next-line no-console
@@ -324,7 +331,7 @@ export default {
         
        
 
-             axios.get(self.api_url, config)
+             axios.get(`http://${this.hostname}:3001/api/qos`, config)
            .then(response => { 
             // eslint-disable-next-line 
            console.log(response.data.docs)

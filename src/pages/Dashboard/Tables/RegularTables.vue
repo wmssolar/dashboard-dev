@@ -190,7 +190,7 @@ export default {
                         
                     }
             ],
-    
+        hostname: '',
         rows_data: [],
         start_date: '',
         end_date: '',
@@ -251,10 +251,16 @@ export default {
   },
   methods: {
  
-
+    gethostname(){
+        var ip = location.hostname;
+       this.hostname = ip;
+  
+      
+    },
     
    forceRerender(){
       // this.componentKey =+ 1;
+      // eslint-disable-next-line
       window.location.reload()
      
    },  
@@ -284,7 +290,7 @@ export default {
                 const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
           };
-           axios.get('http://localhost:3000/api/shipdata', config, )
+           axios.get(`http://${this.hostname}:3001/api/shipdata`, config, )
             .then(function(res) {
               self.shipData = res.data.docs
                 
@@ -298,7 +304,7 @@ export default {
         let self = this;
     
  
-         axios.get(`http://localhost:3000/api/solar`, {
+         axios.get(`http://${this.hostname}:3001/api/solar`, {
                         params: {
                             "queryParams": this.queryParams,
                             "totalDocs": this.queryParams.totalDocs,
@@ -334,11 +340,12 @@ export default {
                 const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
           };
-           axios.get('http://localhost:3000/api/fleetdata', config, )
+           axios.get(`http://${this.hostname}:3001/api/fleetdata`, config, )
 
             .then(function(res) {
               self.FleetData = res.data.docs
-             
+              // eslint-disable-next-line
+             console.log(location.hostname)
               
        }) .catch(function() {
                         // eslint-disable-next-line no-console
@@ -348,7 +355,7 @@ export default {
     fetchData() {
         let self = this;
         
-        axios.get(`http://localhost:3000/api/solar/${this.selectFleet}/${this.selectShips}/${moment(this.start_date).format()}/${moment(this.end_date).format()}`,  {
+        axios.get(`http://${this.hostname}:3001/api/solar/${this.selectFleet}/${this.selectShips}/${moment(this.start_date).format()}/${moment(this.end_date).format()}`,  {
                         params: {
                             "queryParams": this.queryParams,
                             "totalDocs": this.queryParams.totalDocs,
@@ -441,7 +448,7 @@ byShip(){
    
   },
   created(){
-     
+     this.gethostname();
        
   
   },

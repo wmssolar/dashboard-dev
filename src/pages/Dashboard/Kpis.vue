@@ -113,7 +113,7 @@ export default {
  
   data() {
     return {
-       
+       hostname: '',
        qosData: [],
        rows: [],
      columns: [ 'Metrics', 'Periods'
@@ -178,7 +178,12 @@ export default {
    
   },
   methods: {
+        gethostname(){
+        var ip = location.hostname;
+       this.hostname = ip;
 
+
+    },
       searchMethod() {
           this.fetchPercentile();
         
@@ -203,7 +208,7 @@ export default {
                 const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
           };
-           axios.get('http://localhost:3000/api/shipdata', config, )
+           axios.get(`http://${this.hostname}:3001/api/shipdata`, config, )
             .then(function(res) {
               self.shipData = res.data.docs
                // eslint-disable-next-line no-console
@@ -218,7 +223,7 @@ export default {
                 let self = this;
 
       
-        axios.get(`http://localhost:3000/api/solar/${this.selectFleet}`,  {
+        axios.get(`http://${this.hostname}:3001/api/solar/${this.selectFleet}`,  {
                         params: {
                             "queryParams": this.queryParams,
                             "page": this.queryParams.page,
@@ -252,7 +257,7 @@ export default {
         let self = this;
       // the the b-table uses key, value pair to be filled.
        
-        axios.get(`http://localhost:3000/api/ninetyfivePercent/${this.selectFleet}/${this.selectShips}/${moment(this.start_date).format()}/${moment(this.end_date).format()}`,  {
+        axios.get(`http://${this.hostname}:3001/api/ninetyfivePercent/${this.selectFleet}/${this.selectShips}/${moment(this.start_date).format()}/${moment(this.end_date).format()}`,  {
                         params: {
                             "queryParams": this.queryParams,
                             "totalDocs": this.queryParams.totalDocs,
@@ -325,7 +330,7 @@ export default {
           // console.log(self.fields, self.items);
           self.qosData;
        
-           axios.get('http://localhost:3000/api/qostable', config, )
+           axios.get(`http://${this.hostname}:3001/api/qostable`, config, )
             .then(function(res) {
               const qD = res.data.docs
                    // eslint-disable-next-line no-console
@@ -372,7 +377,7 @@ export default {
                 const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
           };
-           axios.get('http://localhost:3000/api/fleetdata', config, )
+           axios.get(`http://${this.hostname}:3001/api/fleetdata`, config, )
             .then(function(res) {
               self.FleetData = res.data.docs
                
@@ -419,7 +424,7 @@ export default {
   },
   created() {
     
-      //  this.byQos();
+       this.gethostname();
      
         this.console = window.console;
   

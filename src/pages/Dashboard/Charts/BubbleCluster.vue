@@ -98,12 +98,20 @@ export default {
   },
  
   methods: {
+
+    gethostname(){
+        var ip = location.hostname;
+       this.hostname = ip;
+  
+       console.log(this.hostname)
+
+    },
         fetchRevenue(){
         // let self = this;
                 const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
           };
-           axios.get('http://localhost:3000/api/revenue', config, )
+           axios.get(`http://${this.hostname}:3001/api/revenue`, config, )
             .then(res => {
             this.rev = res.data.docs
          
@@ -136,6 +144,7 @@ export default {
   },
   created(){
  this.fetchRevenue();
+ this.gethostname();
   },
   mounted(){
      this.fetchRevenue();
