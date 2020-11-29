@@ -1,26 +1,32 @@
-version: "3.8"
-
+version: '3.8'
 services:
 
-  traefik:
-    image: traefik:v2.3
-    container_name: "traefik"
-    command:
-      #- "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  #Proxies requests to internal services
+  # reverse-proxy:
+  #   image: nginx:latest
+  #   container_name: reverse_proxy
+  #   depends_on: 
+  #      - solardashboard
+  #   networks:
+  #      - overlay
+  #   # volumes:
+  #   #   - ./nginx.conf:/etc/nginx/nginx.conf
+  #   ports:
+  #     - 80:80
 
-  whoami:
-    image: "traefik/whoami"
-    container_name: "simple-service"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`172.16.0.15`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+  solardashboard:
+    build: .
+    # image: wmsolar/dashboardv1:latest
+    image: wmsolar/dashboard-prod:1.2
+    container_name: solardashboard
+    networks:
+      - overlay
+    privileged: true
+    ports:
+      - "8080:80"
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+
+networks:
+   overlay:

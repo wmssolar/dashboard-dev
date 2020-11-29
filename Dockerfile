@@ -33,7 +33,7 @@ RUN npm install && \
     npm rebuild node-sass && \
     yum clean all && \
     rm -rf /var/cache/yum  
-COPY ./ .
+COPY . .
 RUN npm run build
 
 FROM nginx as production-stage
