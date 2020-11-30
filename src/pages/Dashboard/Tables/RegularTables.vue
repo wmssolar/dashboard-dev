@@ -18,7 +18,7 @@
     </div>
 
 
-          <el-select class="select-danger" 
+          <el-select class="select-success" 
             placeholder="Select Fleet" 
             v-model="selectFleet"
          
@@ -32,7 +32,7 @@
               </el-option>
             </el-select>
 
-        <el-select class="select-danger" 
+        <el-select class="select-success" 
         placeholder="Select Ship" 
         v-model="selectShips"
      
